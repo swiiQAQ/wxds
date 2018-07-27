@@ -1,0 +1,10 @@
+/* template/formWran.wxss */
+.warnText{
+  width: 100%;
+  height: 70rpx;
+  background: #e64340;
+  color: #fff;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 30rpx;
+}

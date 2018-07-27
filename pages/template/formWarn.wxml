@@ -1,0 +1,6 @@
+<!--template/formWran.wxml-->
+<template name="formWarn">
+  <view class="warnText">
+    {{text}}
+  </view>
+</template>

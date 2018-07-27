@@ -1,0 +1,2 @@
+<import src="../template/searchBar.wxml" />
+<template is="searchBar"/>

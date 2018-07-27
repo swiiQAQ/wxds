@@ -1,0 +1,25 @@
+/* pages/register/register.wxss */
+@import "../template/formWarn.wxss";
+page{
+  background: #EFEFF4;
+}
+.sendCode,.disabledSend{
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  display: inline-block;
+  font-size: 24rpx;
+  border-radius: 4px;
+}
+.sendCode{
+  border: 1px solid #eb3c19;
+  color: #eb3c19;
+}
+.disabledSend{
+  border: 1px solid #888888;
+  color: #898989;
+}
+.form-line navigator{
+  width: 100%;
+}

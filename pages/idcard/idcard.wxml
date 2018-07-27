@@ -1,0 +1,29 @@
+<!--pages/idcard/idcard.wxml-->
+<view class="uploadCardWrap" bindtap='uploadFront'>
+    <block wx:if="{{frontPhoto}}">
+      <image mode="aspectFit" class="frontPhoto" src="{{frontPhoto}}"></image>
+    </block>
+    <block wx:else> 
+      <text>身份证正面照片</text>
+    </block>
+</view>
+<view class="uploadCardWrap" bindtap='uploadBack'>
+    <block wx:if="{{frontPhoto}}">
+      <image mode="aspectFit" class="frontPhoto" src="{{frontPhoto}}"></image>
+    </block>
+    <block wx:else> 
+      <text>身份证反面照片</text>
+    </block>
+</view>
+<view class="tips">*温馨提示： 请上传本人有效二代身份证</view>
+<view class="description">
+  <text>材料审核需要N个工作日，如有疑问</text>
+  <text>
+    请拨打客服热线
+    <span class="phone">{{phone}}</span>
+  </text>
+</view>
+<button class='medium-btn' bindtap='checkIdcard' type='warn'>
+  确定
+</button>
+

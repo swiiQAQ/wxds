@@ -1,0 +1,13 @@
+<template name='searchBar'>
+<navigator url='/pages/search/search'>
+  <view class="searchBarWrap">
+    <view class="searchBar">
+      <icon></icon>
+      <input type="text" placeholder='搜索商品关键字/品类' placeholder-class='sb-placetHolder'></input>
+      <icon></icon>
+    </view>
+  </view>
+</navigator>
+
+  
+</template>

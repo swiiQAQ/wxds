@@ -1,0 +1,40 @@
+/* pages/memberRules/memberRules.wxss */
+page{
+  background: #efeff4
+}
+.mr-wrap{
+  background: #fff;
+  width: 690rpx;
+  margin: 30rpx auto 20rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 956rpx;
+}
+.mr-txTitle{
+  text-align: center;
+  line-height: 92rpx;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 34rpx;
+}
+.agreeWrap{
+  text-align: center;
+}
+.agreeRules{
+  font-size: 24rpx;
+}
+scroll-view{
+  height: 710rpx;
+  margin-bottom: 80rpx;
+}
+checkbox{
+  margin-left: 20rpx;
+}
+.joinUs{
+  margin: 30rpx auto;
+}
+.qst-Des{
+  margin-top: 22rpx;
+  font-size: 22rpx;
+  text-align: center;
+}

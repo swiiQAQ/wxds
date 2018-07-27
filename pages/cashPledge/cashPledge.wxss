@@ -1,0 +1,49 @@
+/* pages/cashPledge/cashPledge.wxss */
+page{
+  background: #efeff4
+}
+.mr-wrap{
+  background: #fff;
+  width: 690rpx;
+  margin: 30rpx auto 20rpx;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.mr-txTitle{
+  text-align: center;
+  line-height: 92rpx;
+  margin: 0 30rpx;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 34rpx;
+}
+.memberRights{
+  height: 300rpx;
+  padding: 33rpx 0 45rpx;
+  box-sizing: border-box;
+}
+  
+.cashPledge{
+  display: flex;
+  border-top: 1px solid #e7e7e7
+}
+  
+.cashPledge span,.cashPledge text{
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding-top: 26rpx;
+  padding-bottom: 40rpx;
+  font-size: 34rpx;
+}
+.cashPledge text{
+  padding-left: 33rpx;
+}
+.cashPledge span{
+  text-align: right;
+  padding-right: 45rpx;
+}
+.mr-bottom{
+  position: absolute;
+  bottom: 60rpx;
+  width: 100%;
+  text-align: center;
+}

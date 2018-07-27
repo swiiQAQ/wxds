@@ -1,0 +1,7 @@
+<!--pages/search/search.wxml-->
+<import src="../template/searchBar.wxml" />
+<template is="searchBar" />
+<view>
+  <text>热门搜索</text>
+  
+</view>

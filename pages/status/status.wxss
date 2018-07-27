@@ -1,0 +1,20 @@
+/* pages/status/status.wxss */
+text,icon,view{
+  text-align: center;
+  display: block;
+}
+icon{
+  margin-top: 100rpx;
+}
+
+.statusText{
+  font-size: 40rpx;
+  margin-top: 60rpx;
+  margin-bottom: 45rpx;
+}
+.description{
+  font-size: 28rpx;
+  color: #888888;
+  margin-top: 45rpx;
+  margin-bottom: 70rpx;
+}

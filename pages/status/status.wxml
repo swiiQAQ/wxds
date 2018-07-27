@@ -1,0 +1,11 @@
+<!--pages/status/status.wxml-->
+<icon wx:if="{{status == 'success'}}" type="success" size="60"></icon>
+<icon wx:if="{{status == 'waiting'}}" type="waiting" size="60"></icon>
+<text class="statusText">{{text}}</text>
+<view class="description">
+  <text wx:for="{{description}}">{{item}}</text>
+</view>
+
+<button wx:if="{{status == 'waiting'}}" class="medium-btn warn" type="warn" bindtap='zf'>知道了</button>
+<button wx:if="{{status == 'success'}}" class="medium-btn warn" type="warn">确认</button>
+

@@ -1,0 +1,20 @@
+<!--pages/memberRules/memberRules.wxml-->
+<view class="mr-wrap">
+  <view class="mr-txTitle">会员守则</view>
+  <view>
+    <scroll-view scroll-y class="">
+      <text></text>
+    </scroll-view>
+    <view class="agreeWrap"> 
+      <label class="agreeRules" for="hasRead">我已经阅读并且同意遵守会员守则</label>
+      <checkbox bindtap='hasRead' checked='{{isChecked}}' id="hasRead" color="#fff"/>
+    </view>
+  </view>
+</view>
+<view class="joinUs medium-btn">
+  <button type='warn' disabled="{{isChecked? '' : 'disabled'}}" class="warn" bindtap='redirect'>申请成为会员</button>
+  <view class="qst-Des">
+    常见问题 在线客服
+    <text bindtap='callCustomService' class="phone" data-phone='10000'>{{phone}}</text>
+  </view>
+</view>

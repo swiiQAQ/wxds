@@ -1,0 +1,6 @@
+<template name="statusTpl">
+  <icon type="success" size="60rpx"></icon>
+  <text></text>
+  <text></text>
+  <button class="medium-btn" type="primary"></button>
+</template>

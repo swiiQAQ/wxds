@@ -1,0 +1,15 @@
+<!--pages/cashPledge/cashPledge.wxml-->
+<view class="mr-wrap">
+  <view class="mr-txTitle">会员权益</view>
+  <view class="memberRights">
+   
+  </view>
+  <view class="cashPledge">
+    <text>保证金</text>
+    <span>￥199</span>
+  </view>
+</view>
+<view class="mr-bottom">
+  <button type="primary" class="medium-btn">支付保证金</button>
+
+</view>

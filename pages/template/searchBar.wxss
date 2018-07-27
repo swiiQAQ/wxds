@@ -1,0 +1,21 @@
+.searchBarWrap{
+  height: 88rpx;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchBar{
+  width: 727rpx;
+  height: 60rpx;
+  background: #e5e5e5;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+}
+.sb-placetHolder{
+  font-size: 28rpx;
+  color: #454545;
+}
+

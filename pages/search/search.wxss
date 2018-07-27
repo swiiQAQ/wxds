@@ -1,0 +1,5 @@
+/* pages/search/search.wxss */
+@import '../template/searchBar.wxss';
+page{
+  background: #f7f7f7;
+}

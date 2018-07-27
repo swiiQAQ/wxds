@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cashPledge/cashPledge",
+    "pages/memberRules/memberRules",
+    "pages/logs/logs",
+    "pages/register/register",
+    "pages/idcard/idcard",
+    "pages/status/status",
+    "pages/user/user",
+    "pages/sort/sort",
+    "pages/cart/cart",
+    "pages/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#F7F7FA",
+    "selectedColor": "#EB3C19",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/homeRed.png"
+      },
+      {
+        "pagePath": "pages/sort/sort",
+        "text": "分类",
+        "iconPath": "images/sort.png",
+        "selectedIconPath": "images/sortRed.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物袋",
+        "iconPath": "images/cart.png",
+        "selectedIconPath": "images/cartRed.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/userRed.png"
+      }
+    ]
+  }
+}
