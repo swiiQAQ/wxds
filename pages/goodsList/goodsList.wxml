@@ -1,0 +1,22 @@
+<!-- <view class="mask {{maskShow ? '' : 'hidden'}}">
+</view> -->
+<wxs src="../../utils/util.wxs" module="tools" />
+
+<view class="filterBar" style="background: {{ complexFold ? '#F7F7F7' : '#fff'}}">
+  <view class='filterWrap'>
+    <view bindtap='complexHandler' class='complex icomoon bottom-arrow {{complexFold ? "sortTop" : "sortBottom"}}'>{{complexText}}</view>
+    <view bindtap=''>价格</view>
+    <view bindtap=''>有货</view>
+    <view bindtap='filterUnfold'>筛选</view>
+    <icon class="icomoon switch-list"></icon>
+  </view>
+  <ul wx:if="{{!complexFold}}" class="complexUnfold">
+    <li bindtap='changeComplex' data-index='1' class="{{complexIndex==1? 'active' : ''}}" data-text='综合'>综合排序</li>
+    <li bindtap='changeComplex' data-index='2' class="{{complexIndex==2? 'active' : ''}}" data-text='新品'>新品优先</li>
+    <li bindtap='changeComplex' data-index='3' class="{{complexIndex==3? 'active' : ''}}" data-text='销量'>销量从高到低</li>
+  </ul>
+</view>
+<!-- <filterPanel bindFoldHandler="foldPanel" wx:if="{{filterPanel}}" showSelectAll="{{showSelectAll}}" othersList="{{othersList}}"></filterPanel> -->
+<scroll-view scroll-y bindscroll='scrollHandler' class="goodsListPanel" lower-threshold="80" bindscrolltolower="scrolltoLowerHandler" data-page ="{{tools.formatArray(3)}}" >
+  <goodslist-ul wx:for="{{tools.formatArray(currentPage)}}" listId="{{item}}" list="{{list[index]}}" defaultImg="{{defaultImg}}" itemHeight = "{{itemHeight}}" lazyloadList = "{{lazyloadList}}" currentPageList="{{currentPageList}}"></goodslist-ul>
+</scroll-view>

@@ -1,2 +1,23 @@
 <!--pages/sort/sort.wxml-->
-<text>pages/sort/sort.wxml</text>
+<import src="../template/searchBar.wxml" />
+<template is="searchBar"/>
+<view class="sort-panel">
+  <scroll-view scroll-y class="first-scroll">
+    <ul class="first-category">
+      <li wx:for="{{firstCategory}}" class="{{firstCateIndex == index? 'active' : ''}}" data-id='{{item.id}}' data-index='{{index}}' bindtap='changeSecondCategory'>{{item.siteCateName}}</li>
+    </ul>
+  </scroll-view>
+  <scroll-view scroll-y class="second-scroll">
+    <view class="second-category">
+      <view wx:for="{{secondCategory[firstCateIndex]}}">
+        <text class="second-cate-name">{{item.siteCateName}}</text>
+        <view class="third-cate-wrap">
+          <view class="third-cate-grid" wx:for="{{item.children}}" data-productcategoryid='{{item.productCategoryId}}' data-id="{{item.id}}" bindtap='linkGoodsList'>
+            <image mode='widthFix' src="{{item.icon}}"></image>
+            <text>{{item.siteCateName}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

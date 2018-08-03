@@ -1,10 +1,10 @@
 .searchBarWrap{
   height: 88rpx;
-  border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #fff;
 }
 .searchBar{
   width: 727rpx;
@@ -16,6 +16,11 @@
 }
 .sb-placetHolder{
   font-size: 28rpx;
-  color: #454545;
+  color: #919191;
+}
+.search{
+  margin-left: 38rpx;
+  margin-right: 18rpx;
+  line-height: 25rpx;
 }
 

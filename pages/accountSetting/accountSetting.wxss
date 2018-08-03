@@ -1,0 +1,19 @@
+/* pages/accountSetting/accountSetting.wxss */
+page{
+  background: #efeff4;
+  padding-top: 26rpx;
+}
+
+button{
+  margin: 40rpx auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.unlock:before,.money:before{
+  margin-right: 8rpx;
+  line-height: 92rpx;
+}
+.unlock:before{
+  margin-right: 12rpx;
+}

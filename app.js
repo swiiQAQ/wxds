@@ -1,4 +1,5 @@
 //app.js
+var config = require('utils/config.js')
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -15,7 +16,7 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if(res.code){
           wx.request({
-            url: 'http://10.8.33.20:8081/wxfx.mobileServer/users/login',
+            url: `${config.config.localhost}/wxfx.mobileServer/users/login`,
             data:{
               code: res.code
             },
@@ -51,6 +52,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    currentPageList: [0, 1]
   }
 })

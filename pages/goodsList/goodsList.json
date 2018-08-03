@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "usingComponents": {
+    "goodslist-ul": "../../components/goodsListPanel"
+  }
+}

@@ -1,0 +1,17 @@
+<!--components/goodsListPanel/goodsListPanel.wxml-->
+<wxs src="../utils/util.wxs" module="tools" />
+<ul class="goodsListFlexBox" style="height:{{panelHeight}}rpx" id="page_{{listId}}" data-ss="{{tools.indexOf(currentPageList,listId)}}">
+  <block wx:if="{{tools.indexOf(currentPageList,listId)}}">
+    <li class="flex-item" wx:for="{{list}}">
+      <image data-qw="{{20*listId+index}}" src="{{lazyloadList[20*listId+index] ? item.imgUrl+'?x-oss-process=image/resize,m_fill,w_330,h_400' : defaultImg}}"></image>
+      <!-- <image src="{{item.imgUrl}}?x-oss-process=image/resize,m_fill,w_300,h_410"></image> -->
+      <text>{{item.brandName}}</text>
+      <text class='product-name'>{{item.productName}}</text>
+      <view>
+        <text class="salesPrice">￥{{item.salesPrice}}</text>
+        <em class="marketPrice">￥{{item.marketPrice}}</em>
+        <span></span>
+      </view>
+    </li>
+  </block>
+</ul>

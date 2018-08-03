@@ -1,0 +1,41 @@
+/* components/goodsListPanel/goodsListPanel.wxss */
+.goodsListFlexBox {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+width: 100%;
+box-sizing: border-box;
+padding: 0 30rpx;
+}
+.goodsListFlexBox .flex-item {
+display: flex;
+flex-direction: column;
+width: 330rpx;
+height: 547rpx;
+}
+.goodsListFlexBox .flex-item image {
+width: 330rpx;
+height: 400rpx;
+}
+.goodsListFlexBox .flex-item text {
+color: #919191;
+font-size: 32rpx;
+}
+.goodsListFlexBox .salesPrice {
+font-weight: 800;
+font-size: 24rpx;
+color: #454545;
+margin-right: 40rpx;
+}
+.goodsListFlexBox .marketPrice {
+text-decoration: line-through;
+font-size: 24rpx;
+color: #919191;
+}
+.product-name{
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

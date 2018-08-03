@@ -1,0 +1,31 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class="order-status">
+  <text class="icomoon success">
+    交易成功
+  </text>
+  <text>订单号：2837428397583475</text>
+</view>
+<view>
+  <view class="sh-info">
+    <text>收货人：王菲</text>
+    <text>收货地址：阿康回复爱丽丝科技大厦ask了解到</text>
+  </view>
+  <navigator class="link-icon">
+    <view class="icomoon reach-yet express-status">正在发货中...</view>
+  </navigator>
+</view>
+<view>
+  <view class="order-detail">
+    <image mode='widthFix' src="http://pic.banggo.com/sources/images/goods/MC/508716/508716_00.jpg"></image>
+    <view class="goods-detail-wrap">
+      <text class="goods-name">ME&CITY 女夏季新款简单水果印花衬衫的房间看哈空间的和法兰克好地方</text>
+      <view class="goods-detail">
+        <span>NO：#321111</span>
+        <span>白色</span>
+        <span>165/86A</span>
+        <span>1件</span>
+      </view>
+    </view>
+    <text class="goods-price">￥80.00</text>
+  </view>
+</view>

@@ -1,2 +1,40 @@
 <!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+<view class="logined">
+  <image mode='widthFix' src="http://cdn.duitang.com/uploads/item/201512/27/20151227154901_jfkR8.jpeg"></image>
+  <text>1298473</text>
+  <navigator url="/pages/accountSetting/accountSetting" class="account-setting">
+    <icon class="icomoon setting"></icon>
+    <span>账号管理</span>
+  </navigator>
+</view>
+<view>
+  <navigator url="/pages/order/order">
+    <view class="myOrder form-link">
+      <text>我的订单</text>
+        <span>查看全部订单</span>
+    </view>
+  </navigator>
+  <view class="order-grid">
+    <view>
+      <icon class="icomoon pay-yet"></icon>
+      <text>待付款</text>
+    </view>
+    <view>
+      <icon class="icomoon deliver-yet"></icon>
+      <text>待发货</text>
+    </view>
+    <view class="noborder">
+      <icon class="icomoon reach-yet"></icon>
+      <text>待收货</text>
+    </view>
+  </view>
+</view>
+
+<view class="user-opr">
+  <navigator >
+    <text class="form-link">管理收货地址</text>
+  </navigator>
+  <navigator>
+    <text class="form-link">客服/反馈</text>
+  </navigator>
+</view>

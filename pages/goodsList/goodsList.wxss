@@ -1,0 +1,83 @@
+
+page {
+  background: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+} 
+.mask{
+  position: fixed;
+  top: 100rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index:77;
+  background: rgba(0, 0, 0, 0.3);
+}
+/* .filterPanelMask{
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+z-index: 99;
+background: rgba(0, 0, 0, 0.3);
+} */
+.filterBar {
+  flex-grow: 0;
+  height: 80rpx;
+  z-index: 88;
+  position: sticky;
+  top: 0;
+  position: -webkit-sticky;
+  width: 100%;
+  color: #ababab;
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  background: #fff;
+}
+.filterWrap {
+  display: flex;
+  height: 80rpx;
+  justify-content: space-around;
+}
+.filterWrap view, .filterWrap i {
+  text-align: center;
+  line-height: 80rpx;
+}
+.complexUnfold{
+  position: absolute;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #454545;
+}
+.complexUnfold li{
+  display: inline-block;
+  width: 100%;
+  height: 100rpx;
+  padding-left: 40rpx;
+  line-height: 100rpx;
+}
+.complexUnfold li.active{
+  color: #eb3c19;
+}
+.goodsListPanel {
+  width: 100%;
+  height: 91%;
+  box-sizing: border-box;
+  position: relative;
+}
+.complex {
+  color: #eb3c19;
+  position: relative;
+  border-bottom: 5rpx solid #eb3c19;
+}
+.sortTop:before, .sortBottom::before {
+  position: absolute;
+  right: -40rpx;
+  font-size: 40rpx;
+}

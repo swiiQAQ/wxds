@@ -1,0 +1,29 @@
+<!--pages/phoneBinding/phoneBinding.wxml-->
+<view class="unbind-process">
+  <text class="{{unbind? '' : 'active'}}">解绑手机</text>
+  <text class="{{unbind? 'active' : ''}}">绑定新手机</text>
+</view>
+<view wx:if="{{unbind}}" class="form-block">
+  <view class="form-line">
+    <text>手机号</text>
+    <input placeholder='请输入需要更换的新手机号'  placeholder-class = "placeholder-input"></input>
+  </view>
+  <view class="form-line">
+    <text>验证码</text>
+    <input placeholder-class = "placeholder-input"></input>
+    <span class="sendCode">发送</span>
+  </view>
+  <button class="medium-btn" type="warn" bindtap='unbindPhone'>绑定手机</button>
+</view>
+<view wx:else  class="form-block">
+  <view class="form-line">
+    <text>手机号</text>
+    <input placeholder='请输入登录所用手机号'  placeholder-class = "placeholder-input"></input>
+  </view>
+  <view class="form-line">
+    <text>验证码</text>
+    <input placeholder-class = "placeholder-input"></input>
+    <span class="sendCode">发送</span>
+  </view>
+  <button class="medium-btn" type="warn" bindtap='unbindPhone'>解除绑定</button>
+</view>

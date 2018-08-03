@@ -1,6 +1,7 @@
 // pages/register/register.js
 var app = getApp();
 var reg = require('../../utils/regexp.js');
+var config = require('../../utils/config.js')
 Page({
 
   /**
@@ -73,7 +74,7 @@ Page({
   },
   sendCode: function(){
     wx.request({
-      url: 'http://10.8.33.20:8081/wxfx.mobileServer/users/validateMobile',
+      url: `${config.localhost}/wxfx.mobileServer/users/validateMobile`,
       data:{
         mobile: this.data.phone,
         openId: app.globalData.openId

@@ -1,0 +1,39 @@
+/* pages/phoneBinding/phoneBinding.wxss */
+page{
+  background: #EFEFF4;
+}
+.unbind-process{
+  height: 88rpx;
+  display: flex;
+  font-size: 28rpx;
+  line-height: 88rpx;
+  border-bottom: 1px solid #eaeaea;
+}
+.unbind-process text{
+  background: #fff;
+  color: #919191;
+  flex-grow: 1;
+  text-align: center;
+}
+.unbind-process text.active{
+  background: #eb3c19;
+  color: #fff;
+}
+.unbind-process text:first-child{
+  position: relative
+}
+.unbind-process text:first-child::after{
+  position: absolute;
+  right: 0rpx;
+  margin-right: -30rpx;
+  content: '';
+  border-width: 44rpx 0 44rpx 32rpx;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+}
+.unbind-process text.active:first-child::after{
+  border-color: transparent transparent transparent #eb3c19;
+}
+.medium-btn{
+  margin-top: 40rpx;
+}

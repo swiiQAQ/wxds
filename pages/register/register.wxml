@@ -34,9 +34,9 @@
     <svg src="/images/home.svg" ></svg>
   </view>
   <view class="form-line" >
-    <navigator url="/pages/idcard/idcard">
+    <!-- <navigator url="/pages/idcard/idcard"> -->
       <text>上传有效身份证照片</text>
-    </navigator>
+    <!-- </navigator> -->
   </view>
 </view>
 <button bindtap="forwardStauts" class="medium-btn warn" type="warn">

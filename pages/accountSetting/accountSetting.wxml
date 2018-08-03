@@ -1,0 +1,7 @@
+<!--pages/accountSetting/accountSetting.wxml-->
+<button class="medium-btn unlock icomoon" type='warn' bindtap='unlockModal'>
+  解除手机绑定
+</button>
+<button class="medium-btn icomoon money" type="special" bindtap='moneyModal'>
+  申请退还保证金
+</button>

@@ -1,16 +1,22 @@
 {
   "pages": [
+    "pages/sort/sort",
+    "pages/goodsList/goodsList",
+    "pages/user/user",
+    "pages/order/order",
+    "pages/phoneBinding/phoneBinding",
     "pages/index/index",
     "pages/cashPledge/cashPledge",
     "pages/memberRules/memberRules",
     "pages/logs/logs",
-    "pages/register/register",
     "pages/idcard/idcard",
     "pages/status/status",
-    "pages/user/user",
-    "pages/sort/sort",
+    "pages/search/search",
+    "pages/register/register",
+    "pages/accountSetting/accountSetting",
     "pages/cart/cart",
-    "pages/search/search"
+    "pages/orderDetail/orderDetail",
+    "pages/goodsDetail/goodsDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
