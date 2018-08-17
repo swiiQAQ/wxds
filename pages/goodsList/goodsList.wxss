@@ -73,11 +73,17 @@ background: rgba(0, 0, 0, 0.3);
 }
 .complex {
   color: #eb3c19;
-  position: relative;
   border-bottom: 5rpx solid #eb3c19;
 }
 .sortTop:before, .sortBottom::before {
   position: absolute;
   right: -40rpx;
   font-size: 40rpx;
+}
+.top-arrow{
+  transform: rotate(180deg)
+}
+.top-arrow::before{
+  content: '\e902';
+  font-size: 16rpx;
 }

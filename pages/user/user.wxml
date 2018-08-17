@@ -31,7 +31,7 @@
 </view>
 
 <view class="user-opr">
-  <navigator >
+  <navigator url="/pages/expressList/expressList">
     <text class="form-link">管理收货地址</text>
   </navigator>
   <navigator>

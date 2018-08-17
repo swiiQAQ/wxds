@@ -1,5 +1,24 @@
 /* pages/cart/cart.wxss */
+.empty{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200rpx;
+}
 .empty image{
   width: 246rpx;
   height: 313rpx;
+  margin-bottom: 75rpx;
+}
+.empty-text{
+  font-size: 30rpx;
+}
+.empty-text2{
+  font-size: 36rpx;
+  display: flex;
+}
+.empty-text2 navigator{
+  color: #eb3c19;
+  text-decoration: underline;
 }

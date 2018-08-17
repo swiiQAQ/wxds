@@ -1,1 +1,155 @@
-<!--pages/goodsDetail/goodsDetail.wxml-->
+<wxs src="../../utils/util.wxs" module="tools" />
+<view class="mask {{mask? 'show':''}}" bindtap='closeMask'>
+  <!-- <view class="overlay">
+    <view class="overlay-tp">
+      <image src=""></image>
+      <view class="">
+        <text class="product-name">{{productName}}</text>
+        <view class="price-wrap">
+          <text class="sales-price">￥{{salesPrice}}</text>
+          <text class="market-price">￥{{marketPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view> -->
+  <view class="overlay" catchtap='holdMask'>
+    <i class="clear icomoon" bindtap='closeMask'></i>
+    <view class="overlay-top flex-box">
+      <image class="sku_img" bindtap='previewImg' data-index="{{}}" src="{{colorImage ? colorImage : galleryList[0].little}}"></image>
+      <view class="sku_info flex-box vertical-box">
+        <text>{{productName}}</text>
+        <view class="price-wrap">
+          <b class="sales-price">￥{{salesPrice}}</b>
+          <em class="market-price">{{marketPrice}}</em>
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-y class="overlay_center flex-box vertical-box">
+      <view class="size-select-box flex-box">
+        <em>尺码：</em>
+        <view class="sizeWrap flex-box">
+          <span id="size_{{item.sizeCode}}" wx:for="{{sizeList}}" class="sizeBox {{sizeId === index? 'selectSize' : '' }} {{(tools.indexOf(noStockArray,item.sizeCode))? 'disabled' : ''}}" bindtap="selectSize" data-id="{{index}}" data-sizename="{{item.sizeName}}"
+            data-sizecode="{{item.sizeCode}}">{{item.sizeName}}</span>
+        </view>
+      </view>
+      <view class="color-select-box flex-box">
+        <em>颜色：</em>
+        <view class="colorWrap flex-box">
+          <span id="color_{{item.colorCode}}" wx:for="{{colorList}}" class="colorBox {{colorId === index? 'selectColor' : '' }} {{(tools.indexOf(noStockArray,item.colorCode))? 'disabled' : ''}}" bindtap="selectColor" data-id="{{index}}" data-colorname="{{item.colorName}}"
+            data-colorcode="{{item.colorCode}}" data-image="{{item.imageUrl}}">{{item.colorName}}</span>
+        </view>
+      </view>
+      <view class="amount-select-box">
+        <em>数量</em>
+        <amount-select stockNum="{{stockNum}}"></amount-select>
+        <!-- <view class="amount-select">
+          <view class="decrease">-</view>
+          <input type='number' value='1'></input>
+          <view class="increase">+</view>
+        </view> -->
+      </view>
+    </scroll-view>
+    <view class="overlay_bottom flex-box vertical-box">
+      <button type="warn" class="medium-btn" bindtap='addToCart'>
+        确认
+      </button>
+    </view>
+  </view>
+</view>
+<scroll-view class="goods-detail" scroll-y style="height:{{screenHeight-110}}rpx">
+  <view class="gallerySwiperWrap">
+    <swiper class="gallerySwiper" bindchange="changeGalleryIndex">
+      <swiper-item wx:for="{{galleryList}}">
+        <image src="{{item.medium}}"></image>
+      </swiper-item>
+    </swiper>
+    <span class="galleryPagination">
+      <em>{{galleryIndex+1}}</em>
+      /
+      <em>{{galleryList.length}}</em>
+    </span>
+  </view>
+  <view class="product-info">
+    <text class="brand-name">{{brandName}}</text>
+    <text class="product-name">{{productName}}</text>
+    <view class="price-wrap">
+      <text class="sales-price">￥{{salesPrice}}</text>
+      <text class="market-price">￥{{marketPrice}}</text>
+      <text></text>
+    </view>
+    <text class='select-attr'>选择尺码 颜色 数量</text>
+  </view>
+  <view class="detail-ct">
+    <view class="ct-text">
+      <text>图文详情</text>
+      <text>商品信息</text>
+    </view>
+  </view>
+  <view id="tuwen">
+    <block wx:if="{{tuwen[2]}}">
+      <image mode="widthFix" src="http://s.banggo.com/pub7/images/mbshop/detailtitle/mtzs_wap.png"></image>
+      <image mode='widthFix' wx:for="{{tuwen[2]}}" src="{{'http://pic.banggo.com'+item.imageUrl}}"></image>
+    </block>
+    <block wx:if="{{tuwen[4]}}">
+      <image mode='widthFix' src="http://s.banggo.com/pub7/images/mbshop/detailtitle/xjzs_wap.png"></image>
+      <image mode="widthFix" wx:for="{{tuwen[4]}}" src="{{'http://pic.banggo.com'+item.imageUrl}}"></image>
+    </block>
+    <block wx:if="{{tuwen[3]}}">
+      <image mode="widthFix" src="http://s.banggo.com/pub7/images/mbshop/detailtitle/ysxz_wap.png"></image>
+      <view wx:for="{{tuwen[3]}}">
+        <image mode="widthFix" src="{{'http://pic.banggo.com'+item.imageUrl}}"></image>
+        <text style="font-size:26rpx;">{{item.colorName}}</text>
+      </view>
+    </block>
+    <block wx:if="{{sizeTable}}">
+      <!-- <table class="sizeTable">
+        <tr wx:for="{{sizeTable[0]}}" wx:for-index="i">
+          <td wx:for="{{sizeTable}}" wx:for-index="j">
+            {{sizeTable[j][i]}}
+          </td>
+        </tr>
+      </table> -->
+      <image mode="widthFix" src="http://s.banggo.com/pub7/images/mbshop/detailtitle/cmgg_wap.png"></image>
+      <view class="sizeTable">
+        <view class="sizeColumn" wx:for="{{sizeTable}}">
+          <view class="sizeItem" wx:for="{{item}}">{{item}}</view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{sizePicture}}">
+      <image mode="widthFix" src='http://s.banggo.com/pub7/images/mbshop/detailtitle/clff_wap.png'></image>
+      <image mode="widthFix" src='{{"http://pic.banggo.com/"+sizePicture}}'></image>
+    </block>
+  </view>
+  <block wx:if="{{goodsAttrs}}">
+    <view id="productTextInfo" class="productTextInfo">
+      <image mode="widthFix" src='http://s.banggo.com/pub7/images/mbshop/detailtitle/spxx_wap.png'></image>
+      <view wx:for="{{goodsAttrs}}">
+        <p class="GoodsAttrs">
+          <b class="">{{item.attrName}}:</b>
+          <span>{{item.attrValue[0]}}</span>
+        </p>
+      </view>
+      <view>
+        <image mode='widthFix' src='http://s.banggo.com/pub7/images/mbshop/detailtitle/ppjs_wap.png'></image>
+        <text>{{brandInfo}}</text>
+      </view>
+      <view>
+        <image mode='widthFix' src='http://s.banggo.com/pub7/images/mbshop/detailtitle/bjtj_wap.png'></image>
+        <text>{{salePoint}}</text>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<view class="sticky-bottom">
+  <view class="icon-wrap">
+    <icon class="icomoon service"></icon>
+    <text>客服</text>
+  </view>
+  <view class="icon-wrap">
+    <icon class="icomoon cart"></icon>
+    <text>购物袋</text>
+  </view>
+  <view class='add-to-cart' bindtap='showMask'>加入购物车</view>
+  <view class="buy">立即购买</view>
+</view>

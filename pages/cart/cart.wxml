@@ -1,6 +1,8 @@
 <!--pages/cart/cart.wxml-->
 <view class='empty'>
   <image mode='widthFix' src="/images/cartEmpty.png"></image>
-  <text>购物袋里什么都没有...</text>
-  <text>快去</text>
+  <text class="empty-text">购物袋里什么都没有...</text>
+  <p class="empty-text2">
+    快<navigator>去逛逛活动</navigator>吧
+  </p>
 </view>

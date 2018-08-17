@@ -1,4 +1,5 @@
 /* pages/idcard/idcard.wxss */
+@import "../template/formWarn.wxss";
 page{
   background: #EFEFF4
 }

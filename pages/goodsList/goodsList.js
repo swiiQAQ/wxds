@@ -43,7 +43,9 @@ Page({
     //排序index
     complexIndex: 0,
     //商品单条高度(rpx单位)
-    itemHeight: 547
+    blockItemHeight: 547,
+    lineItemHeight: 220,
+    3: false
   },
 
   /**
@@ -57,9 +59,9 @@ Page({
       productCategoryId: productCategoryId
     })
     var _this = this;
-    if (app.globalData.currentPageList[0] !== 0) {
+    // if (app.globalData.currentPageList[0] !== 0) {
       app.globalData.currentPageList = [0, 1];
-    }
+    // }
     this.setData({ currentPageList: app.globalData.currentPageList });
     this.fetchGoodsList( 1, function (data) {
       //创造一个每个值都为false，长度和list一样的数组
@@ -67,7 +69,7 @@ Page({
       _this.setData({ pageSize: length });
       var arr = [];
       for (var i = 0; i < length; i++) {
-        if (i < 4) {
+        if (i < 5) {
           arr[i] = true
         }
         else {
@@ -157,9 +159,18 @@ Page({
     var scrollTop = e.detail.scrollTop;
     var size = this.data.pageSize;
     var oldPageList = app.globalData.currentPageList;
-    var itemHeight = this.data.itemHeight;
-    var calc = Math.floor((scrollTop + itemHeight*2 / config.dpi) / (itemHeight / config.dpi) * 2);
-    var currentPageList = [Math.floor(calc / size - 2), Math.floor(calc / size)];
+    if(!this.data.switchList){
+      var itemHeight = this.data.blockItemHeight;
+      var calc = Math.floor((scrollTop + itemHeight * 2 / config.dpi) / (itemHeight / config.dpi) * 2) + 1;
+      var currentPageList = [Math.floor(calc / size - 1), Math.floor(calc / size)];
+    }
+    else{
+      var itemHeight = this.data.lineItemHeight;
+      var calc = Math.floor((scrollTop + config.screenHeight)/ (itemHeight/config.dpi));
+      console.log(calc);
+      var currentPageList = [Math.floor(calc / size - 1), Math.floor(calc / size)];
+    }
+    
     if (calc > size && currentPageList.toString() !== oldPageList.toString()) {
       this.setData({ currentPageList: currentPageList });
       app.globalData.currentPageList = currentPageList;
@@ -202,6 +213,14 @@ Page({
   foldPanel: function () {
     this.setData({
       filterPanel: false,
+    });
+  },
+  //切换商品列表展示
+  switchList:function(){
+    var switchList = this.data.switchList;
+    this.setData({ 
+      switchList: !switchList,
+      scrollTop: 0
     });
   }
 })

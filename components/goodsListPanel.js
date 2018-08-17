@@ -15,7 +15,10 @@ Component({
     defaultImg: String,
     lazyloadList: Array,
     currentPageList: Array,
-    itemHeight: Number
+    lineItemHeight: Number,
+    blockItemHeight: Number,
+    //列表排列方式
+    switchList: Boolean
   },
 
   /**
@@ -34,10 +37,22 @@ Component({
   methods: {
     setList: function () {
       var list = app.globalData.list[this.properties.listId];
-      this.setData({ list: list });
       var length = list.length;
-      var panelHeight = length / 2 * (this.data.itemHeight);
-      this.setData({ panelHeight : panelHeight});
+      var blockPanelHeight = length / 2 * (this.data.blockItemHeight);
+      var linePanelHeight = length * (this.data.lineItemHeight);
+      
+      this.setData({ 
+        list: list,
+        length: length,
+        blockPanelHeight: blockPanelHeight,
+        linePanelHeight: linePanelHeight
+      });
+    },
+    linkGoodsDetail: function(e){
+      var productCode = e.currentTarget.dataset.code;
+      wx.navigateTo({
+        url: `/pages/goodsDetail/goodsDetail?productCode=${productCode}`,
+      })
     }
   }
 

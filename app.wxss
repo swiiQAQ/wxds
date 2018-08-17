@@ -34,7 +34,8 @@ page{
 }
 .bottom-arrow:before{
   content: '\e902';
-  font-size: 12rpx;
+  font-size: 16rpx;
+  margin-left: 14rpx;
 }
 .cart:before{
   content: '\e903';
@@ -144,13 +145,13 @@ button[type=special]{
   box-sizing: border-box;
   align-items: center;
   border-bottom: 1px solid #eaeaea;
+  font-size: 34rpx;
   margin-left: 30rpx;
 }
 .form-line:last-child{
   border-bottom: none;
 }
 .form-line text{
-  font-size: 34rpx;
   min-width: 200rpx;
   height: 88rpx;
   display: inline-block;
@@ -210,12 +211,12 @@ button[type=special]{
   color: #2C52FD;
   text-decoration: underline;
 }
-navigator.link-icon{
+.link-icon{
   position: relative;
   display: flex;
   align-items: center;
 }
-navigator.link-icon::after{
+.link-icon::after{
   content: '';
   position: absolute;
   right: 0rpx;
