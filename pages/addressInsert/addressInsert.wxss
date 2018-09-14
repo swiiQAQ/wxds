@@ -1,14 +1,19 @@
 /* pages/expressSelect/expressSelect.wxss */
+@import "../template/formWarn.wxss";
+
 .address{
-  height: 155rpx;
+  height: 176rpx;
   align-items: flex-start;
+}
+textarea{
+  line-height: 56rpx;
+  padding-left: 30rpx;
+  height: 176rpx!important;
+
 }
 picker{
   padding-left: 30rpx;
 }
 .medium-btn{
   margin-top: 93rpx;
-}
-.link-icon::after{
-  right: 20rpx;
 }

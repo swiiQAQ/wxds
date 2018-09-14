@@ -8,10 +8,14 @@ Component({
     listId: {
       type: Number,
       observer: function (newVal, oldVal) {
-        console.log(newVal);
       }
     },
-
+    refresh: {
+      type: Boolean,
+      observer: function(newVal){
+        this.setList();
+      }
+    },
     defaultImg: String,
     lazyloadList: Array,
     currentPageList: Array,
@@ -37,6 +41,9 @@ Component({
   methods: {
     setList: function () {
       var list = app.globalData.list[this.properties.listId];
+      if(!list){
+        return;
+      }
       var length = list.length;
       var blockPanelHeight = length / 2 * (this.data.blockItemHeight);
       var linePanelHeight = length * (this.data.lineItemHeight);

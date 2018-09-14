@@ -2,8 +2,7 @@
 var app = getApp();
 var { submitValidate, regValidate} = require('../../utils/validate.js');
 var {config} = require('../../utils/config.js');
-
-
+var { errorHandler } = require('../../utils/util.js');
 
 Page({
 
@@ -17,7 +16,9 @@ Page({
     warnText: '',
     multiArray: [],
     multiIndex: [0,0],
-    photo: false
+    photo: '',
+    seconds: 60,
+    disabledChange: ''
   },
 
   /**
@@ -36,13 +37,22 @@ Page({
       arr1.push(i);
     }
     this.setData({ multiArray: [arr1,arr2]});
+
+    if (app.globalData.user&&app.globalData.user.status == 0){
+      this.setData({
+        disabledChange: 1,
+        name: app.globalData.user.name,
+        mobile: app.globalData.user.mobile,
+        num: '****'
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
@@ -78,17 +88,32 @@ Page({
   },
   sendCode: function(){
     wx.request({
-      url: `${config.localhost}/wxfx.mobileServer/users/validateMobile`,
+      url: `${config.localhost}/users/validateMobile`,
       data:{
         mobile: this.data.mobile,
-        // openId: app.globalData.openId
-        openId: config.testOpenId
+        openId: app.globalData.openId
       },
-      success: json => {
-        if(json.data.code == '0'){
-          this.setData({ warnText: json.data.message})
-        }
-        console.log(json);
+      success: res => {
+        errorHandler.fail(res,()=>{
+          this.setData({
+            warnText: res.data.message,
+          })
+        }).success(()=>{
+          this.setData({
+            disabledSend: true
+          })
+          var timer = setInterval(()=>{
+            if(this.data.seconds >1){
+              this.setData({ seconds: this.data.seconds - 1 });
+            }else{
+              clearInterval(timer);
+              this.setData({
+                disabledSend: false,
+                seconds: 60
+              })
+            }
+          },1000)
+        })
       }
     })
     // this.setData({ disabledSend: true})
@@ -99,56 +124,29 @@ Page({
   //   }
   // },
   register:function(){
-    var result = submitValidate(['name', 'mobile','idCardNum','expire','num','photo'],this);
-    if(result === true){
-      wx.request({
-        url: `${config.localhost}/wxfx.mobileServer/users/registry`,
-        header: {
-          'content-type': 'application/x-www-form-urlencoded ;charset=utf-8 ',
-        },
-        data: {
-          // openId: config.testOpenId,
-          openId: app.globalData.openId,
-          name: this.data.name,
-          mobile: this.data.mobile,
-          idCardNum: this.data.idCardNum,
-          expiryDate: this.data.expire,
-          num: this.data.num
-        },
-        success: function (res) {
-          console.log(res);
-        },
-      })
+    if( !app.globalData.user){
+      this.registerInit();
     }
-    else{
-      this.setData({ warnText: result});
+    else if (app.globalData.user.status == 0){
+      this.editForm();
     }
-    // var data ={
-    //   status : 'waiting',
-    //   text : '申请审核中...',
-    //   description : ['我们工作人员正在对您的资质进行审核', '通过后将会短信通知您审核结果，请耐心等待...']
-    // }
-    // data = JSON.stringify(data);
-    // wx.redirectTo({
-    //   url: `/pages/status/status?data=${data}`,
-    // })
   },
   validate: function(e){
     this.setData({
       [e.currentTarget.dataset.name]: e.detail.value
     });
-    var result = regValidate(e.currentTarget.dataset.name,this);
-    if(result!==true){
-      this.setData({ warnText: result});
-    }
-    else{
-      this.setData({ 
-        warnText: '',
-      });
-    }
+    // var result = regValidate(e.currentTarget.dataset.name,this);
+    // if(result!==true){
+    //   this.setData({ warnText: result});
+    // }
+    // else{
+    //   this.setData({ 
+    //     warnText: '',
+    //   });
+    // }
   },
   bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     var value = e.detail.value;
     var multiArray = this.data.multiArray;
     var expire =  multiArray[0][value[0]]+'/'+multiArray[1][value[1]];
@@ -157,4 +155,68 @@ Page({
       expire: expire
     })
   },
+  //第一次注册
+  registerInit: function(){
+    var result = submitValidate(['name', 'mobile', 'idCard', 'expire', 'num', 'photo'], this);
+    if (result === true) {
+      wx.request({
+        url: `${config.localhost}/users/registry`,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded ;charset=utf-8 ',
+        },
+        data: {
+          openId: app.globalData.openId,
+          name: this.data.name,
+          mobile: this.data.mobile,
+          idCard: this.data.idCard,
+          expiryDate: this.data.expire,
+          num: this.data.num
+        },
+        success: (res)=>{
+          errorHandler.fail(res).success(()=>{
+            this.redirectState();
+          })
+        }
+      })
+    }
+    else {
+      this.setData({ warnText: result });
+    }
+  },
+  //修改身份证相关信息
+  editForm: function(){
+    var result = submitValidate(['idCard', 'expire', 'photo'],this);
+    if(result == true){
+      wx.request({
+        url: `${config.localhost}/users/modifyIdCard`,
+        data: {
+          openId: app.globalData.openId,
+          idCard: this.data.idCard,
+          expiryDate: this.data.expire,
+        },
+        success: (res) => {
+          errorHandler.fail(res,()=>{
+            this.setData({ warnText: res.data.message })
+          }).success(()=>{
+            this.redirectState();
+          })
+        }
+      })
+    }
+    else{
+      this.setData({ warnText: result});
+    }
+  },
+  //跳转状态页面
+  redirectState: function(){
+    var data = {
+      status: 'waiting',
+      text: '申请审核中...',
+      description: ['您的信息正在审核', '请耐心等待并请关注手机短信通知']
+    }
+    data = JSON.stringify(data);
+    wx.redirectTo({
+      url: `/pages/status/status?data=${data}`,
+    })
+  }
 })

@@ -141,7 +141,7 @@ button[type=special]{
 .form-line{
   height: 88rpx;
   display: flex;
-  padding-right:30rpx;
+  /* padding-right:30rpx; */
   box-sizing: border-box;
   align-items: center;
   border-bottom: 1px solid #eaeaea;
@@ -210,19 +210,4 @@ button[type=special]{
 .phone{
   color: #2C52FD;
   text-decoration: underline;
-}
-.link-icon{
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.link-icon::after{
-  content: '';
-  position: absolute;
-  right: 0rpx;
-  width: 18rpx;
-  height: 18rpx;
-  border-top: 2px solid #c7c7cc;
-  border-right: 2px solid #c7c7cc;
-  transform: rotate(45deg);
 }

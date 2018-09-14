@@ -1,6 +1,7 @@
 // pages/memberRules/memberRules.js
-var config = require('../../utils/config.js');
-
+var { config } = require('../../utils/config.js');
+var { callCustomService } = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -8,14 +9,19 @@ Page({
    */
   data: {
     isChecked: false,
-    phone: config.config.customServicePhone
+    phone: config.customServicePhone
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    //获取不包含tabbar的可视高度
+    wx.getSystemInfo({
+      success: function(res) {
+        app.globalData.windowHeightWithoutBar = res.windowHeight;
+      },
+    })
   },
 
   /**
@@ -66,11 +72,8 @@ Page({
   onShareAppMessage: function () {
   
   },
-  callCustomService:function(e){
-    var phone = e.target.dataset.phone;
-     wx.makePhoneCall({
-       phoneNumber: phone,
-     })
+  callCustomService:function(){
+    callCustomService();
   },
   hasRead: function(e){
     var isChecked = this.data.isChecked;

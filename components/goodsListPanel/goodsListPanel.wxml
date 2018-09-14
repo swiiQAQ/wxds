@@ -1,5 +1,5 @@
 <!--components/goodsListPanel/goodsListPanel.wxml-->
-<wxs src="../utils/util.wxs" module="tools" />
+<wxs src="../../utils/util.wxs" module="tools" />
 <ul class="goodsListFlexBox {{switchList ? 'line-list' : 'block-list'}}" style="height:{{switchList? linePanelHeight: blockPanelHeight}}rpx" id="page_{{listId}}" data-ss="{{tools.indexOf(currentPageList,listId)}}">
   <block wx:if="{{tools.indexOf(currentPageList,listId)}}">
     <block wx:if="{{!switchList}}">
@@ -16,7 +16,7 @@
       </li>
     </block>
     <block wx:else>
-      <li class="flex-item" wx:for="{{list}}">
+      <li class="flex-item" wx:for="{{list}}" bindtap='linkGoodsDetail' data-code="{{item.productCode}}" >
         <image mode='widthFix ' data-qw="{{20*listId+index}}" src="{{lazyloadList[20*listId+index] ? item.imgUrl+'?x-oss-process=image/resize,m_fill,w_200,h_200' : defaultImg}}"></image>
         <!-- <image src="{{item.imgUrl}}?x-oss-process=image/resize,m_fill,w_300,h_410"></image> -->
         <view class="list-info">

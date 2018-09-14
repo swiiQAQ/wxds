@@ -19,10 +19,10 @@
 </view>
 <view class="tips">*温馨提示： 请上传本人有效二代身份证</view>
 <view class="description">
-  <text>材料审核需要N个工作日，如有疑问</text>
+  <text>材料审核需要3个工作日，如有疑问</text>
   <text>
     请拨打客服热线
-    <span class="phone">{{phone}}</span>
+    <span class="phone" bindtap='callPhone'>{{phone}}</span>
   </text>
 </view>
 <button class='medium-btn' bindtap='checkIdcard' type='warn'>

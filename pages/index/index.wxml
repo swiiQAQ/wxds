@@ -1,2 +1,29 @@
+<wxs src="../../utils/util.wxs" module="tools" />
+
 <import src="../template/searchBar.wxml" />
-<template is="searchBar"/>
+<navigator url="/pages/search/search">
+  <template is="searchBar" />
+</navigator>
+<!-- <view class="mask {{maskShow ? '' : 'hidden'}}">
+</view> -->
+
+<view class="filterBar" style="background: {{ complexFold ? '#F7F7F7' : '#fff'}}">
+  <view class='filterWrap'>
+    <view class="{{xinpin? 'active': ''}}" bindtap='xinpin'>新品</view>
+    <view bindtap='priceFilter' class="price-wrap">
+      <text class="{{priceFilter? 'active': ''}}">价格</text>
+      <view class="arrow-box">
+        <icon class="icomoon bottom-arrow {{priceFilter =='bottom'? 'active':''}}"></icon>
+        <icon class="icomoon top-arrow {{priceFilter =='top'? 'active':''}}"></icon>
+      </view>
+    </view>
+    <view class="{{hasStock? 'active': ''}}" bindtap='youhuo'>有货</view>
+    <icon class="icomoon {{switchList? 'switch-list' : 'switch-list2'}}" bindtap='switchList'></icon>
+  </view>
+</view>
+
+<!-- <filterPanel bindFoldHandler="foldPanel" wx:if="{{filterPanel}}" showSelectAll="{{showSelectAll}}" othersList="{{othersList}}"></filterPanel> -->
+<scroll-view scroll-top="{{scrollTop}}" scroll-y bindscroll='scrollHandler' class="goodsListPanel" lower-threshold="80" bindscrolltolower="scrolltoLowerHandler" data-page="{{tools.formatArray(3)}}">
+  <goodslist-ul wx:for="{{tools.formatArray(currentPage)}}" listId="{{item}}" refresh="{{refresh}}" defaultImg="{{defaultImg}}" lineItemHeight="{{lineItemHeight}}" blockItemHeight="{{blockItemHeight}}" lazyloadList="{{lazyloadList}}" currentPageList="{{currentPageList}}"
+    switchList="{{switchList}}"></goodslist-ul>
+</scroll-view>

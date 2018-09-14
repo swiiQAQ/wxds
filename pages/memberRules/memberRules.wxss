@@ -26,6 +26,8 @@ page{
 scroll-view{
   height: 710rpx;
   margin-bottom: 80rpx;
+  padding-top: 25rpx;
+  box-sizing: border-box;
 }
 checkbox{
   margin-left: 20rpx;
@@ -37,4 +39,17 @@ checkbox{
   margin-top: 22rpx;
   font-size: 22rpx;
   text-align: center;
+}
+
+.rule-content text,.rule-content view{
+  display: block;
+  color: #353535;
+  font-size: 28rpx;
+  line-height: 48rpx;
+}
+.rule-sentence2{
+  margin-top: 38rpx;
+}
+.rule-sentence3{
+  text-align: right
 }

@@ -2,14 +2,25 @@
 <view class="mr-wrap">
   <view class="mr-txTitle">会员权益</view>
   <view class="memberRights">
-   
+    <text>  为保护所有分销商权益，美邦品牌将对分销商收取保证金，主要用于维护价格体系与品牌知识产权，如分销商退出美邦微信分销，可申请退还保证金（30个工作内）。</text>
+    <view class="member-sentence2">
+      <text>对以下情况的分销商将取消美邦品牌的微信分销资格：</text>
+      <text>1、不执行美邦品牌规定的指导销售价；</text>
+      <text>2、没有使用美邦品牌提供的图片等指定材料；</text>
+      <text>3、欺骗误导消费者，造成消费者投诉，严重影响品牌形象的情形。</text>
+      <text>4、盗用美邦知识产权，造成消费者投诉，严重影响品牌形象的情形。</text>
+    </view>
+    <text class="member-sentence3">以上条款最终解释权归上海美特斯邦威服饰股份有限公司所有</text>
   </view>
   <view class="cashPledge">
     <text>保证金</text>
-    <span>￥199</span>
+    <span>￥888</span>
   </view>
 </view>
 <view class="mr-bottom">
-  <button type="primary" class="medium-btn">支付保证金</button>
-
+  <button type="primary" class="medium-btn" bindtap='cashPledge'>支付保证金</button>
+  <view class="qst-Des">
+    常见问题 在线客服
+    <text bindtap='callCustomService' class="phone" >{{phone}}</text>
+  </view>
 </view>

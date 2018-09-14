@@ -1,7 +1,19 @@
 <!--pages/search/search.wxml-->
-<import src="../template/searchBar.wxml" />
-<template is="searchBar" />
+<!-- <import src="../template/searchBar.wxml" /> -->
+<!-- <template is="searchBar" /> -->
+<view class="searchBarWrap">
+  <view class="searchBar">
+    <icon class="icomoon search"></icon>
+    <input type="text" placeholder='搜索商品关键字/品类' bindconfirm='search' data-name='searchText' bindinput='inputSearch' confirm-type='search' placeholder-class='sb-placetHolder' value="{{searchText}}"></input>
+    <icon class="icomoon clear" bindtap='clear'></icon>
+  </view>
+</view>
+
 <view>
-  <text>热门搜索</text>
-  
+  <text class="keyword-text">热门搜索</text>
+  <view class='keywords-wrap'>
+    <span data-index="{{index}}" data-word='{{item}}' class="keywords {{index == id? 'active': '' }}" bindtap="selectKeywords" wx:for="{{keywords}}" >
+      {{item}}
+    </span>
+  </view>
 </view>

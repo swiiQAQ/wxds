@@ -1,4 +1,11 @@
 /* pages/cart/cart.wxss */
+page{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  overflow-y:hidden;
+  border-top: none;
+}
 .empty{
   display: flex;
   flex-direction: column;
@@ -21,4 +28,142 @@
 .empty-text2 navigator{
   color: #eb3c19;
   text-decoration: underline;
+}
+
+
+/* 有商品时 */
+.cart-list-box{
+  flex-grow: 1;
+}
+/* 商品列表 */
+.goods-item image{
+  width: 150rpx;
+  height: 150rpx;
+}
+.goods-item{
+  height: 210rpx;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  padding: 30rpx 30rpx 30rpx 0;
+  box-sizing: border-box;
+  align-items: center;
+  border-top: 1rpx solid #eaeaea;
+}
+.goods-item checkbox{
+  width: 100rpx;
+  text-align: center;
+  line-height: 210rpx;
+}
+.goods-info{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  width: 290rpx;
+}
+.goods-name{
+  font-size:24rpx;
+  color:#333;
+  line-height:26rpx;
+  height:52rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.sizeColor{
+  margin-bottom: 10rpx;
+}
+.sizeColor text{
+  color: #919191;
+  font-size: 24rpx;
+}
+.sizeColor .color{
+  margin-right: 20rpx;
+}
+.price{
+  font-size: 24rpx;
+  color: #333;
+}
+.item-rt{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+.delete{
+  color: #333;
+  font-size: 30rpx;
+  text-align: right;
+  width:50rpx;
+  align-self:flex-end;
+  height:65rpx;
+}
+.disabled-good .goods-name, .disabled-good .price{
+  color: #919191!important;
+}
+.disabled-text{
+  background: #c7c7c7;
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 4px;
+  margin-left: 25rpx;
+  margin-right: 20rpx;
+  width:49rpx;
+  text-align:center;
+}
+
+/* amount-select */
+.amount-select-box view{
+  width: 176rpx;
+  height: 50rpx;
+  display: flex;
+  border:1px solid #c7c7c7;
+  border-radius:4px;
+  overflow:hidden;
+}
+.amount-select-box input{
+  width: 76rpx;
+  text-align: center;
+  border-left:1px solid #c7c7c7;
+  border-right:1px solid #c7c7c7;
+}
+.amount-select-box span{
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 50rpx;
+  background: #fff!important;
+}
+
+/* 购物车底部 */
+.cart-sticky-bottom{
+  width: 100%;
+  height: 142rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-top: 1rpx solid #eaeaea;
+}
+.cart-sticky-bottom text{
+  font-size: 24rpx; 
+}
+
+.pay-for{
+  width: 280rpx;
+  height: 88rpx;
+  margin-right: 20rpx;
+}
+.selectAll{
+  margin-left: 30rpx;
+  /* margin-right: 14rpx; */
+  flex-grow: 1;
+}
+.totalPrice{
+    margin-left: 10rpx;
+    font-size: 30rpx!important;
+    margin-right: 30rpx;
 }

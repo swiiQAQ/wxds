@@ -2,8 +2,23 @@
 <view class="mr-wrap">
   <view class="mr-txTitle">会员守则</view>
   <view>
-    <scroll-view scroll-y class="">
-      <text></text>
+    <scroll-view scroll-y class="rule-content">
+
+      <text>加入美邦微信分销的会员享有以下权利和义务：</text>
+      <text>1.享有美邦分销小程序活动档期内的商品在微信渠道销售和推广的权利；</text>
+      <text>2.享有就分销过程中存在的问题或困难向美邦品牌提出报告或建议；</text>
+      <text>3.享有在小程序内下单，美邦品牌根据订单供货的权利；</text>
+      <text>4.严格遵守美邦品牌制定的价格体系、严格遵守美邦品牌的知识产权等义务；</text>
+      <text>5.有义务配合美邦品牌进行订单信息核对检查；</text>
+      <text>6.有义务维护美邦品牌的网络信誉和品牌形象；</text>
+      <text>7.有义务确保本人不向他人泄露美邦品牌的价格结算等商业秘密；</text>
+
+      <view class="rule-sentence2">
+        如违反以上任意一条，并一经美邦品牌核实，美邦品牌有权终止其合作并没收对应保证金，由此造成的一切损失该由其承担，美邦品牌有权追究其法律责任。
+      </view>
+      <view class='rule-sentence3'>
+        以上条款最终解释权归上海美特斯邦威服饰股份有限公司所有
+      </view>
     </scroll-view>
     <view class="agreeWrap"> 
       <label class="agreeRules" for="hasRead">我已经阅读并且同意遵守会员守则</label>
@@ -15,6 +30,6 @@
   <button type='warn' disabled="{{isChecked? '' : 'disabled'}}" class="warn" bindtap='redirect'>申请成为会员</button>
   <view class="qst-Des">
     常见问题 在线客服
-    <text bindtap='callCustomService' class="phone" data-phone='10000'>{{phone}}</text>
+    <text bindtap='callCustomService' class="phone" data-phone='{{phone}}'>{{phone}}</text>
   </view>
 </view>

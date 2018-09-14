@@ -1,0 +1,5 @@
+<view class="amount-select">
+  <span class="decrease" bindtap='decrease' >-</span>
+  <input type='number' value='{{amount}}' bindblur="numLimit"></input>
+  <span class="increase" style="background: #eb3c19" bindtap='increase'>+</span>
+</view>

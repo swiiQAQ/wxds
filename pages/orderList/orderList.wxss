@@ -1,0 +1,116 @@
+/* pages/order/order.wxss */
+.order-status-panel{
+  display: flex;
+  height: 85rpx;
+  padding: 0 30rpx;
+  justify-content: space-around;
+  align-content: center;
+  font-size: 28rpx;
+  color: #919191;
+  border-bottom: 1px solid #eaeaea;
+  background: #fff;
+}
+.order-status-panel li{
+  height: 100%;
+  line-height: 88rpx;
+  box-sizing: border-box;
+}
+.order-status-panel li.active{
+  color: #EB3C19;
+  border-bottom: 6rpx solid #EB3C19;
+}
+.order-wrap{
+  height: 289rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eaeaea;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.order-info{
+  padding: 34rpx 0 30rpx 8rpx;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-grow: 1;
+}
+.order-info image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 4rpx;
+}
+
+.order-info-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 20rpx;
+  line-height: 30rpx;
+}
+.order-info-detail text{
+  font-size: 24rpx;
+  color: #333333
+}
+.order-info-detail span{
+  font-size: 22rpx;
+  color: #919191;
+}
+.order-info-detail i{
+  background: #EB3C19;
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 30rpx;
+  padding: 0 10rpx;
+  margin-left: 20rpx;
+}
+.order-info em{
+  font-size: 22rpx;
+}
+.order-operate{
+  display: flex;
+  padding: 30rpx 0 30rpx 8rpx;
+  align-items: flex-end;
+  height: 124rpx;
+  box-sizing: border-box;
+}
+.amount{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.amount .count{
+  font-size: 24rpx;
+}
+.amount .actual-amount{
+  font-size: 26rpx;
+  color: #EB3C19
+}
+.actual-amount{
+  margin-top: 8rpx;
+}
+.cancel-order,.pay-for{
+  width: 130rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  display: inline-block;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 20rpx;
+}
+.cancel-order{
+  border: 1px solid #EB3C19;
+  color: #EB3C19;
+
+}
+.pay-for{
+  background: #EB3C19;
+  color: #fff;
+}
+.no-order{
+  margin-top: 460rpx;
+  text-align: center;
+  color: #ababab;
+  font-size: 32rpx;
+}

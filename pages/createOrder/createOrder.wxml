@@ -1,0 +1,61 @@
+<!--pages/createOrder/createOrder.wxml-->
+<scroll-view scroll-y style="height:{{scrollHeight}}px">
+  <block wx:if="{{addressId}}">
+  <navigator class="address form-link" url="/pages/addressList/addressList?select=true">
+    <view class="user-info">
+      <text>{{name}}</text>
+      <text class="mobile">{{mobile}}</text>
+  </view>
+    <view class="addressDetail">{{address}}</view>
+  </navigator>
+  </block>
+  <block wx:else>
+    <navigator class="addressEmpty" url="/pages/addressList/addressList?select=true">
+      <icon class="icomoon add"></icon>
+      请选择地址
+    </navigator>
+  </block>
+  <view class="goods-list">
+    <view wx:for="{{cartItems}}" class="goods-item">
+      <image src="http://pic.banggo.com{{item.goodsList[0].imageUrl}}"></image>
+      <view class="goods-info">
+        <text class="goods-name">{{item.goodsList[0].goodsName}}</text>
+        <view class="sizeColor">
+          <text class="color">{{item.goodsList[0].saleAttr1Value}}</text>
+          <text>{{item.goodsList[0].saleAttr2Value}}</text>
+        </view>
+        <view class="price">￥{{item.goodsList[0].price}}</view>
+      </view>
+      <view class="item-rt">
+        <!-- <icon class="icomoon delete" bindtap='deleteGoods' data-id="{{item.id}}"></icon> -->
+        <text>x{{item.quantity}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="form-line isNeedInvoice">
+    <text>是否需要发票</text>
+    <switch bindchange="isNeedInvoice"></switch>
+  </view>
+  <view class="form-line" style='display:{{isOrderPrint? "flex": "none"}}'>
+    <text>发票信息（个人）</text>
+    <input placeholder='填写姓名' data-name='invPayee' bindinput='validate' placeholder-class='placeholder-input' disabled='{{isOrderPrint? "" : true}}'></input>
+  </view>
+  <view class="moneyDetail">
+    <view>
+      <text>商品金额</text>
+      <text style="color:#f8584f">￥{{totalPrice}}</text>
+    </view>
+    <view wx:if="{{shippingFee}}">
+      <text>运费</text>
+      <text>￥{{shippingFee}}</text>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="sticky-bottom">
+  <view>
+    <text class="count-text">合计:</text>
+    <text class="count-money">￥{{totalPrice+shippingFee}}</text>
+  </view>
+  <button class="wechatPay" type='primary' bindtap='wechatPay'>微信支付</button>
+</view>

@@ -1,7 +1,13 @@
 // pages/idcard/idcard.js
-var {config} = require('../../utils/config.js');
-var { validateRequired } = require('../../utils/validate.js');
+var {
+  config
+} = require('../../utils/config.js');
+var {
+  validateRequired
+} = require('../../utils/validate.js');
+var { errorHandler, callCustomService } = require('../../utils/util.js');
 var app = getApp();
+
 Page({
 
   /**
@@ -19,110 +25,131 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function(options) {
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
-  checkIdcard:function(){
-    var result = validateRequired(['idCard0', 'idCard1'],this);
-    if(result !== true){
-      this.setData({ warnText: result});
+  checkIdcard: function() {
+    var result = validateRequired(['idCard0', 'idCard1'], this);
+    if (result !== true) {
+      this.setData({
+        warnText: result
+      });
       return;
     }
-    this.setData({ warnText: ''});
+    this.setData({
+      warnText: ''
+    });
     // wx.redirectTo({
     //   url: '/pages/register/register?idcard=true'
     // })
 
     wx.request({
-      url: `${config.localhost}/wxfx.mobileServer/users/getSignature?openId=${app.globalData.openId}`,
-      success: (res)=>{
-        var message = res.data.message;
-        app.globalData.ossConfig={
-          accessid: message.accessid,
-          dir: message.dir,
-          expire: message.expire,
-          host: message.host,
-          policy: message.policy,
-          signature: message.signature
-        }
-        
-        this.ossUpload()        
+      url: `${config.localhost}/users/getSignature?openId=${app.globalData.openId}`,
+      success: (res) => {
+        errorHandler.fail(res).success(()=>{
+          var data = res.data.data;
+          app.globalData.ossConfig = {
+            accessid: data.accessid,
+            dir: data.dir,
+            expire: data.expire,
+            host: data.host,
+            policy: data.policy,
+            signature: data.signature
+          }
+
+          this.ossUpload().then(() => {
+            //返回注册页面，身份证认证通过
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2];
+            prevPage.setData({
+              photo: true,
+              warnText: ''
+            });
+            wx.navigateBack({
+              delta: 1
+            })
+          })
+        })
       }
     })
   },
-  uploadFront: function(){
+  uploadFront: function() {
     wx.chooseImage({
-      sizeType: 'original',
+      sizeType: 'compressed',
       success: res => {
         var tempFilePaths = res.tempFilePaths[0];
-        console.log(tempFilePaths);
-        this.setData({ 'idCard0': tempFilePaths })
+        this.setData({
+          'idCard0': tempFilePaths
+        })
       },
     })
   },
-  uploadBack: function () {
+  uploadBack: function() {
     wx.chooseImage({
       sizeType: 'original',
       success: res => {
         var tempFilePaths = res.tempFilePaths[0];
 
-        this.setData({ 'idCard1': tempFilePaths })
+        this.setData({
+          'idCard1': tempFilePaths
+        })
       },
     })
   },
   //上传阿里云
-  ossUpload: function(){
-    
+  ossUpload: function() {
     var ossConfig = app.globalData.ossConfig;
-    wx.uploadFile({
-      url: `${ossConfig.host}`,
-      filePath: this.data.idCard0,
-      name: 'file',
-      header: {
-        'content-type': 'multipart/form-data'
-      },
-      formData: {
-        'key': ossConfig.dir+'/0.png',
-        'policy': ossConfig.policy,
-        'OSSAccessKeyId': ossConfig.accessid,
-        'signature': ossConfig.signature,
-        'success_action_status': '200'
-      },
-      success: function(res) {
-        //返回注册页面，身份证认证通过
-        var pages = getCurrentPages();
-        var prevPage = pages[pages.length - 2];
-        prevPage.setData({ photo: true});
-        wx.navigateBack({
-          delta: 1
+    
+    return new Promise((resolve, reject) => {
+      for (var i = 0; i < 2; i++) {
+        wx.uploadFile({
+          url: `${ossConfig.host}`,
+          filePath: this.data['idCard' + i],
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData: {
+            'key': `${ossConfig.dir}/${app.globalData.openId}/${i}.jpg`,
+            'policy': ossConfig.policy,
+            'OSSAccessKeyId': ossConfig.accessid,
+            'signature': ossConfig.signature,
+            'success_action_status': '200'
+          },
+          success: function(res) {
+            return resolve()
+          },
+          fail: function(res) {
+
+          },
+          complete: function(res) {},
         })
-      },
-      fail: function(res) {
-        
-      },
-      complete: function(res) {},
+      }
     })
+  },
+  callPhone: function(){
+    callCustomService();
   }
 })

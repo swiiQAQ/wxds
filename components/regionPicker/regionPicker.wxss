@@ -1,0 +1,8 @@
+/* components/regionPicker/regionPicker.wxss */
+.picker{
+  white-space: nowrap;
+  height: 88rpx;
+  width: 450rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

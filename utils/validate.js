@@ -12,15 +12,24 @@ var validators={
       idCard0: '缺少正面照片',
       idCard1: '缺少反面照片',
       mobile: '手机号未填写',
-      idCardNum: '身份证号码未填写',
-      photo: '请上传身份证照片'
+      idCard: '身份证号码未填写',
+      photo: '请上传身份证照片',
+      name: '姓名未填写',
+      expressDetail: '详细地址未填写',
+      zipCode: true,
+      area: '地区未选择',
+      expire: '有效期未选择',
+      colorCode: '请选择颜色',
+      sizeCode: '请选择尺码',
+      addressId: '请选择地址',
+      num: '验证码未填写'
     }
   },
   mobile:{
     rule: /^[\d]{11}$/,
     msg: '手机号格式不正确'
   },
-  idCardNum:{
+  idCard:{
     rule: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
     msg: '身份证格式不正确'
   },
@@ -74,9 +83,17 @@ var regValidate= (properties,context)=>{
     return true;
   }
 }
+var validate = (context,e) =>{
+  var name = e.target.dataset.name;
+  context.setData({ [name]: e.detail.value});
+}
 
 module.exports = {
+  //验证条件并且是否填满
   submitValidate: submitValidate,
+  //正则验证
   regValidate: regValidate,
-  validateRequired: validateRequired
+  //是否填满
+  validateRequired: validateRequired,
+  validate: validate
 }

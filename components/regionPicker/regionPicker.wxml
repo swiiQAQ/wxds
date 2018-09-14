@@ -1,0 +1,11 @@
+<!--components/regionPicker/regionPicker.wxml-->
+<picker mode="multiSelector" bindchange="valueChangeHandler" bindcolumnchange="columnChangeHandler" value="{{multiIndex}}" range="{{multiArray}}">
+  <view class="picker" data-arr="{{zoneId}}">
+    <block wx:if="{{province}}">
+      {{province}}, {{city}}, {{district}}
+    </block>
+    <block wx:elif="{{showPicker}}">
+    {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+    </block>
+  </view>
+</picker>

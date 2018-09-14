@@ -1,4 +1,7 @@
 // pages/accountSetting/accountSetting.js
+var {config} = require("../../utils/config.js");
+var { errorHandler } = require("../../utils/util.js");
+var app = getApp();
 Page({
 
   /**
@@ -75,23 +78,42 @@ Page({
             url: '/pages/phoneBinding/phoneBinding',
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
   },
   moneyModal:function(){
+    var status = app.globalData.status;
+    if(status == 12){
+      wx.showToast({
+        title: '您的保证金正在退还中',
+        icon: 'none'
+      });
+      return;
+    }
     wx.showModal({
       title: '确认退还保证金？',
-      content: '保证金退还后您将无法再进销商品，保证金将在财务审核中，X个工作日后退还，具体以到账时间为准。',
+      content: '保证金退还后您将无法在美邦微信分销进销商品，保证金将在财务审核中，30个工作日后退还，具体以到账时间为准。',
       confirmText: '退保证金',
       cancelText: '暂时不退',
-      success: function (res) {
+      success: (res)=> {
         if (res.confirm) {
-          console.log('用户点击确定')
+          this.applyRefund();
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
+      }
+    })
+  },
+  applyRefund: function(){
+    wx.request({
+      url: `${config.localhost}/deposit/applyRefund?openId=${app.globalData.openId}`,
+      success:(res)=>{
+        errorHandler.fail(res).success(()=>{
+          wx.showToast({
+            title: '申请成功',
+          })
+        });
       }
     })
   }

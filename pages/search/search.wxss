@@ -3,3 +3,31 @@
 page{
   background: #f7f7f7;
 }
+.keywords{
+  min-width: 150rpx;
+  height: 60rpx;
+  background: #fff;
+  color: #454545;
+  font-size: 28rpx;
+  border-radius: 100rpx;
+  display: inline-block;
+  border: 1px solid #eaeaea;
+  text-align: center;
+  line-height: 60rpx;
+  margin:0 30rpx 30rpx 0rpx;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+.keywords-wrap{
+  padding: 0 30rpx;
+}
+.keyword-text{
+  margin: 30rpx;
+  font-size: 28rpx;
+  color: #919191;
+  display: block;
+}
+.keywords.active{
+  background: #eb3c19;
+  color: #fff;
+}

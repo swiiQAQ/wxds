@@ -1,4 +1,6 @@
 /* pages/phoneBinding/phoneBinding.wxss */
+@import "../template/formWarn.wxss";
+
 page{
   background: #EFEFF4;
 }

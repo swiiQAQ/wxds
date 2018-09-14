@@ -13,12 +13,14 @@ page{
   color: #fff;
   position: relative;
 }
-.logined image{
+.logined .avatar{
   width: 110rpx;
   height: 110rpx;
-  border-radius: 50%;
   border: 5rpx solid #fff;
   margin: 15rpx 0;
+  border-radius: 50%;
+  overflow: hidden;
+  /* clip-path: circle(50% at center); */
 }
 .logined text{
   font-size: 36rpx;
@@ -75,7 +77,7 @@ page{
   border-bottom: 1px solid #eaeaea;
   margin-bottom: 20rpx;
 }
-.order-grid view{
+.order-grid .order-item-grid{
   display: flex;
   flex-direction: column;
   position: relative;
@@ -83,15 +85,34 @@ page{
   flex-grow: 1;
   justify-content: center;
 }
-.order-grid view:not(.noborder)::after{
+.order-grid .order-item-grid:not(.noborder)::after{
   content:'';
   position: absolute;
   right: 0;
   height: 58rpx;
   border-right: 1px solid #eaeaea;
+  top: 50%;
+  margin-top: -29rpx;
 }
 .order-grid text{
-  margin-top: 12rpx;
   font-size: 24rpx;
   color: #919191;
+}
+
+
+/* 小红点 */
+
+.redDot{
+  width: 22rpx;
+  height: 22rpx;
+  background: #EB3C19;
+  color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  right: -11rpx;
+  display: inline-block;
+  line-height:22rpx;
+  text-align:center;
+  font-size:18rpx;
+
 }

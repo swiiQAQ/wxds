@@ -1,4 +1,7 @@
 /* pages/status/status.wxss */
+page{
+  background: #fff;
+}
 text,icon,view{
   text-align: center;
   display: block;

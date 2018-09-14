@@ -17,8 +17,8 @@ function formatArray(num){
 
 //indexOf函数
 function indexOf(arr,item){
-  console.log("arr:"+arr);
-  console.log("item:"+item);
+  // console.log("arr:"+arr);
+  // console.log("item:"+item);
   if(arr.indexOf(item) == -1){
     return false;
   }

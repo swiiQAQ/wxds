@@ -1,7 +1,9 @@
 <!--pages/sort/sort.wxml-->
 <import src="../template/searchBar.wxml" />
-<template is="searchBar"/>
-<view class="sort-panel">
+<navigator url="/pages/search/search">
+  <template is="searchBar"/>
+</navigator>
+<view class="sort-panel" style="height: {{scrollHeight}}px">
   <scroll-view scroll-y class="first-scroll">
     <ul class="first-category">
       <li wx:for="{{firstCategory}}" class="{{firstCateIndex == index? 'active' : ''}}" data-id='{{item.id}}' data-index='{{index}}' bindtap='changeSecondCategory'>{{item.siteCateName}}</li>
@@ -12,7 +14,7 @@
       <view wx:for="{{secondCategory[firstCateIndex]}}">
         <text class="second-cate-name">{{item.siteCateName}}</text>
         <view class="third-cate-wrap">
-          <view class="third-cate-grid" wx:for="{{item.children}}" data-productcategoryid='{{item.productCategoryId}}' data-id="{{item.id}}" bindtap='linkGoodsList'>
+          <view class="third-cate-grid" wx:for="{{item.children}}" data-productcategoryid='{{item.productCategoryId}}' data-id="{{item.id}}" data-catename='{{item.siteCateName}}' bindtap='linkGoodsList'>
             <image mode='widthFix' src="{{item.icon}}"></image>
             <text>{{item.siteCateName}}</text>
           </view>

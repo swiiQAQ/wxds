@@ -1,4 +1,7 @@
 // pages/user/user.js
+var { config } = require('../../utils/config.js');
+var { callCustomService } = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -12,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({ name: app.globalData.user.name})
   },
 
   /**
@@ -26,7 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.fetchOrderStatus();
   },
 
   /**
@@ -62,5 +65,20 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  fetchOrderStatus: function(){
+    wx.request({
+      url: `${config.localhost}/order/getUnFinishOrderInfo?openId=${app.globalData.openId}`,
+      success:(res)=>{
+        this.setData({
+          unPay: res.data.data.unPay,
+          unGet: res.data.data.unGet,
+          unSend: res.data.data.unSend
+        })
+      }
+    })
+  },
+  callPhone: function(){
+    callCustomService();
   }
 })

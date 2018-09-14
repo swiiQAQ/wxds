@@ -1,4 +1,7 @@
 // pages/orderDetail/orderDetail.js
+var { config } = require('../../utils/config.js');
+var { errorHandler } = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -12,7 +15,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var orderSn = options.orderSn;
+    if(options.fromPage){
+      this.setData({ back: true});
+    }
+    wx.request({
+      url: `${config.localhost}/order/getOrderDetail`,
+      data:{
+        openId: app.globalData.openId,
+        orderSn: orderSn,
+        isHistory: 0
+      },
+      success: (res)=>{
+        errorHandler.fail(res).success(()=>{
+          this.setData({
+            orderInfo: res.data.data.orderInfo,
+            goodsInfo: res.data.data.goodsInfo,
+            orderDistributeInfo: res.data.data.orderDistributeInfo
+          })
+        })
+      }
+    })
   },
 
   /**
@@ -40,7 +63,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    if(this.data.back){
+      wx.navigateBack({
+        delta: 2
+      })
+    }
   },
 
   /**

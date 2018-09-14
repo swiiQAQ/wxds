@@ -5,7 +5,7 @@
   <view class="form-block">
     <view class="form-line">
       <text>姓名</text>
-      <input data-name="name" bindblur="validate" placeholder='请输入完整姓名' placeholder-class="placeholder-input"></input>
+      <input data-name="name" bindinput="validate" placeholder='请输入完整姓名' disabled='{{disabledChange ?  true : false}}' placeholder-class="placeholder-input" value="{{name}}" class="{{disabledChange? 'disabled' : ''}}"></input>
     </view>
   </view>
   <view class="form-block">
@@ -15,26 +15,29 @@
     </view>
     <view class="form-line">
       <text>+86</text>
-      <input bindblur="validate" data-name="mobile" placeholder='请填写手机号码' type='number' placeholder-class="placeholder-input"></input>
+      <input bindinput="validate" data-name="mobile" placeholder='请填写手机号码' type='number' disabled='{{disabledChange ? true: false}}' placeholder-class="placeholder-input" value="{{mobile}}" class="{{disabledChange? 'disabled' : ''}}"></input>
     </view>
     <view class="form-line">
       <text>验证码</text>
-      <input bindblur="validate" data-name="num" placeholder='请输入手机验证码' type='number' placeholder-class="placeholder-input"></input>
-      <span wx:if="{{!disabledSend}}" class="sendCode" bindtap='sendCode'>发送</span>
-      <span class="sendCode" wx:else>重新发送{{seconds}}</span>
+      <input bindinput="validate" data-name="num" placeholder='请输入手机验证码' type='number' disabled='{{disabledChange ? true: false}}' placeholder-class="placeholder-input" value="{{num}}" class="{{disabledChange? 'disabled' : ''}}"></input>
+      <block wx:if="{{disabledChange}}"></block>
+      <span wx:elif="{{!disabledSend}}" class="sendCode" bindtap='sendCode'>发送</span>
+      <span wx:else class="sendCode" >重新发送({{seconds}}s)</span>
     </view>
   </view>
   <view class="form-block">
     <view class="form-line">
       <text>身份证</text>
-      <input bindblur="validate" data-name="idCard" placeholder='请输入有效身份证号码' placeholder-class="placeholder-input"></input>
+      <input bindinput="validate" type='number' data-name="idCard" placeholder='请输入有效身份证号码' placeholder-class="placeholder-input"></input>
     </view>
     <view class="form-line">
       <text>有效期</text>
       <!-- <input placeholder='请选择月份/年份' placeholder-class="placeholder-input"></input> -->
       <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
         <view class="picker">
-          {{multiArray[0][multiIndex[0]]}}/{{multiArray[1][multiIndex[1]]}}
+          <block wx:if="{{expire}}">
+            {{multiArray[0][multiIndex[0]]}}/{{multiArray[1][multiIndex[1]]}}
+          </block>
         </view>
       </picker>
       <svg src="/images/home.svg"></svg>

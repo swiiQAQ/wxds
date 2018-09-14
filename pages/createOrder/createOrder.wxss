@@ -1,0 +1,160 @@
+/* pages/createOrder/createOrder.wxss */
+/* 地址信息 */
+.address{
+  height:200rpx;
+  padding:42rpx 30rpx;
+  border-bottom:1px solid #eaeaea;
+  justify-content:space-between;
+  background:#fff;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  font-size: 28rpx;
+
+}
+.addressEmpty{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-bottom:1px solid #eaeaea;
+}
+.addressDetail{
+  padding-right: 60rpx;
+  box-sizing: border-box;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.add{
+  font-size: 36rpx;
+  margin-right: 21rpx;
+  color: #C7C7CC;
+}
+.mobile{
+  margin-left: 50rpx;
+}
+
+/* 商品列表 */
+.goods-item image{
+  width: 150rpx;
+  height: 150rpx;
+  margin-left: 30rpx;
+}
+.goods-item{
+  height: 210rpx;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  padding: 30rpx 30rpx 30rpx 0;
+  box-sizing: border-box;
+  align-items: center
+}
+.goods-item checkbox{
+  width: 100rpx;
+  text-align: center;
+  line-height: 210rpx;
+}
+.goods-info{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  width: 290rpx;
+}
+.goods-name{
+  font-size:24rpx;
+  color:#333;
+  line-height:26rpx;
+  height:52rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.sizeColor{
+  margin-bottom: 10rpx;
+}
+.sizeColor text{
+  color: #919191;
+  font-size: 24rpx;
+}
+.sizeColor .color{
+  margin-right: 20rpx;
+}
+.price{
+  font-size: 24rpx;
+  color: #333;
+}
+.item-rt{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 24rpx;
+  color: #333;
+}
+.delete{
+  color: #333;
+  font-size: 30rpx;
+  text-align: right;
+}
+
+.moneyDetail{
+  padding: 14rpx 30rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 145rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+}
+.moneyDetail view{
+  display: flex;
+  justify-content: space-between
+}
+.form-line{
+  line-height: 88rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  margin-left: 0;
+  padding-left: 30rpx;
+}
+.isNeedInvoice{
+  justify-content: space-between;
+  padding-right: 30rpx;
+  margin-bottom: -20rpx;
+}
+
+
+/* 底部 */
+.sticky-bottom{
+  height: 144rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 40rpx;
+  padding-right: 20rpx;
+  background: #fff;
+  justify-content: space-between;
+  border-top: 1rpx solid #eaeaea;
+}
+.count-text{
+  font-size: 24rpx;
+  margin-right: 14rpx;
+}
+.count-money{
+  font-size: 30rpx;
+}
+.wechatPay{
+  width: 250rpx;
+  height: 88rpx;
+  margin: 0;
+}

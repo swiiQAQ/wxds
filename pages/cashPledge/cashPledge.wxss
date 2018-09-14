@@ -17,11 +17,22 @@ page{
   font-size: 34rpx;
 }
 .memberRights{
-  height: 300rpx;
-  padding: 33rpx 0 45rpx;
+  padding: 33rpx 45rpx;
   box-sizing: border-box;
+  color: #333333;
+  font-size: 28rpx;
+  line-height: 48rpx;
 }
-  
+.member-sentence2{
+  margin: 38rpx 0;
+}
+.member-sentence2 text{
+  display: block;
+}
+.member-sentence3{
+  text-align: right;
+}
+
 .cashPledge{
   display: flex;
   border-top: 1px solid #e7e7e7
@@ -42,8 +53,12 @@ page{
   padding-right: 45rpx;
 }
 .mr-bottom{
-  position: absolute;
-  bottom: 60rpx;
   width: 100%;
+  text-align: center;
+  margin-top: 30rpx;
+}
+.qst-Des{
+  margin-top: 22rpx;
+  font-size: 22rpx;
   text-align: center;
 }

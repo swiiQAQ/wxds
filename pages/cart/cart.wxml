@@ -1,8 +1,48 @@
 <!--pages/cart/cart.wxml-->
-<view class='empty'>
+<view class="mask"></view>
+<view wx:if="{{cartItems}}">
+  <scroll-view scroll-y class="cart-list-box" style="height:{{scrollHeight}}px">
+    <view wx:for="{{cartItems}}" class="goods-item {{item.errorCode? 'disabled-good': ''}}" >
+      <text wx:if="{{item.errorCode}}" class="disabled-text">失效</text>
+      <checkbox wx:else color="#fff" data-id="{{item.id}}" data-index="{{index}}" data-checkstatus="{{item.checkStatus}}" checked="{{item.checkStatus == 1? true: false}}" catchtap='changeSelectHandler'></checkbox>
+      <image bindtap='linkGoods' data-code='{{item.goodsList[0].goodsSn}}' src="http://pic.banggo.com{{item.goodsList[0].imageUrl}}"></image>
+      <view class="goods-info" data-code='{{item.goodsList[0].goodsSn}}'>
+        <text class="goods-name">{{item.goodsList[0].brandName}} {{item.goodsList[0].goodsName}}</text>
+        <view class="sizeColor">
+          <text class="color">{{item.goodsList[0].saleAttr1Value}}</text>
+          <text>{{item.goodsList[0].saleAttr2Value}}</text>
+        </view>
+        <view class="price">￥{{item.goodsList[0].price}}</view>
+      </view>
+      <view class="item-rt" catchtap='catch'>
+        <icon class="icomoon delete" bindtap='deleteGoods' data-id="{{item.id}}"></icon>
+        <view wx:if="{{!item.errorCode}}" class="amount-select-box">
+          <!-- <amount-select amount="{{item.quantity}}"></amount-select> -->
+          <view class="amount-select">
+            <span class="decrease" bindtap='decrease' data-id="{{item.id}}" data-quantity="{{item.quantity}}">-</span>
+            <input type='number' value='{{item.quantity}}' data-id="{{item.id}}" bindblur="inputModify"></input>
+            <span class="increase" bindtap='increase' data-id="{{item.id}}" data-quantity="{{item.quantity}}">+</span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="cart-sticky-bottom">
+    <view class="selectAll">
+      <checkbox color="#fff" checked='{{checkStatus == 1? true: false}}' bindtap='selectAllHandler' ></checkbox>
+      <text>全选</text>
+    </view>
+    <text >合计:</text>
+    <text class="totalPrice">￥{{totalPrice}}</text>
+    <button type="warn" class="pay-for" bindtap='goToPay'>去结算({{goodsTotalNumber>99? '99+': goodsTotalNumber}})</button>
+  </view>
+</view>
+
+<view wx:else class='empty'>
   <image mode='widthFix' src="/images/cartEmpty.png"></image>
   <text class="empty-text">购物袋里什么都没有...</text>
   <p class="empty-text2">
-    快<navigator>去逛逛活动</navigator>吧
+    快
+    <navigator open-type='switchTab' url='/pages/index/index'>去逛逛活动</navigator>吧
   </p>
 </view>

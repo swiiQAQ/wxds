@@ -1,5 +1,6 @@
 // pages/sort/sort.js
 var {config,mock} = require('../../utils/config.js');
+var { setRedDot,errorHandler } = require('../../utils/util.js');
 var app = getApp();
 Page({
 
@@ -22,7 +23,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      scrollHeight: app.globalData.windowHeightWithBar - 90 / config.dpi
+    })
   },
 
   /**
@@ -30,15 +33,15 @@ Page({
    */
   onReady: function () {
     wx.request({
-      url: `${config.localhost}/wxfx.mobileServer/category/index?openId=${config.testOpenId}`,
+      url: `${config.localhost}/category/index?openId=${app.globalData.openId}`,
       success: res => {
-        if (res.data.code) {
-          this.setData({ 
+        errorHandler.fail(res).success(()=>{
+          this.setData({
             firstCategory: res.data.data,
             secondCateId: res.data.data[0].id
           });
           this.fetchSecondCategory(res.data.data[0].id);
-        }
+        })
       }
     })
     // this.setData({ 
@@ -50,7 +53,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    setRedDot(app);
   },
 
   /**
@@ -92,12 +95,14 @@ Page({
     var storageData = this.data.secondCategory[index]   
     if(!storageData){
       wx.request({
-        url: `${config.localhost}/wxfx.mobileServer/category/getChildren?categoryId=${id}&openId=${config.testOpenId}`,
+        url: `${config.localhost}/category/getChildren?categoryId=${id}&openId=${app.globalData.openId}`,
         success: (res)=>{
-          var dataName = `secondCategory[${index}]`;
-          this.setData({ 
-            [dataName]: res.data.data.children,
-          });
+          errorHandler.fail(res).success(()=>{
+            var dataName = `secondCategory[${index}]`;
+            this.setData({
+              [dataName]: res.data.data.children,
+            });
+          })
         }
       })
     } 
@@ -120,9 +125,9 @@ Page({
   linkGoodsList: function(e){
     var id = e.currentTarget.dataset.id;
     var productCategoryId = e.currentTarget.dataset.productcategoryid;
-
+    var catename = e.target.dataset.catename;
     wx.navigateTo({
-      url: `/pages/goodsList/goodsList?id=${id}&productCategoryId=${productCategoryId}`,
+      url: `/pages/goodsList/goodsList?id=${id}&productCategoryId=${productCategoryId}&cateName=${catename}`,
     })
-  }
+  },
 })

@@ -1,5 +1,6 @@
 // pages/goodsList/goodsList.js
 var {config} = require('../../utils/config.js');
+var { errorHandler } = require('../../utils/util.js');
 var app = getApp();
 Page({
 
@@ -11,7 +12,7 @@ Page({
   */
   data: {
     //商品列表
-    list: [],
+    list: false,
     complexFold: true,
     complexText: '综合',
     maskShow: false,
@@ -45,43 +46,42 @@ Page({
     //商品单条高度(rpx单位)
     blockItemHeight: 547,
     lineItemHeight: 220,
-    3: false
+    //价格，新品，有货，关键字
+    priceFilter: '',
+    price: '',
+    xinpin: true,
+    searchText:'',
+    hasStock: '',
+    id: '',
+    productCategoryId: '',
+    refresh: false,
+    //商品列表是否有结果
+    listResult: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var id = options.id;
-    var productCategoryId = options.productCategoryId;
-    this.setData({
-      id: id,
-      productCategoryId: productCategoryId
-    })
-    var _this = this;
-    // if (app.globalData.currentPageList[0] !== 0) {
-      app.globalData.currentPageList = [0, 1];
-    // }
+    app.globalData.currentPageList = [0, 1];
     this.setData({ currentPageList: app.globalData.currentPageList });
-    this.fetchGoodsList( 1, function (data) {
-      //创造一个每个值都为false，长度和list一样的数组
-      var length = data.pageSize;
-      _this.setData({ pageSize: length });
-      var arr = [];
-      for (var i = 0; i < length; i++) {
-        if (i < 5) {
-          arr[i] = true
-        }
-        else {
-          arr[i] = false;
-        }
-      }
-      app.globalData.list = [data.results];
-
-      _this.setData({
-        lazyloadList: arr,
-      });
+    if(options.id){
+      var id = options.id;
+      var productCategoryId = options.productCategoryId;
+      var cateName = options.cateName;
+      this.setData({
+        id: id,
+        productCategoryId: productCategoryId,
+        cateName: cateName
+      })
+    }
+    if(options.searchText){
+      this.setData({ searchText: options.searchText});
+    }
+    this.fetchGoodsList(1,  (data)=> {
+      this.initLazyloadList(data, this);
     });
+    
   },
 
   /**
@@ -104,7 +104,13 @@ Page({
   onReachBottom: function () {
   
   },
-
+  //返回页面 避免搜索多层回退问题
+  onUnload: function(){
+    var pages = getCurrentPages();
+    wx.redirectTo({
+      url: '/'+pages[0].__route__,
+    })
+  },
   /**
    * 用户点击右上角分享
    */
@@ -115,14 +121,35 @@ Page({
     var id = this.data.id;
     var productCategoryId = this.data.productCategoryId;
     pageNum = pageNum ? pageNum : 1;
+    var hasStock = this.data.hasStock == ''?'':Number(this.data.hasStock);
+    // var xinpin = this.data.xinpin == '' ? '' : Number(this.data.xinpin);
+    var price = this.data.price == '' ? '' : Number(this.data.price);
     wx.request({
-      // url: 'http://m.banggo.com/searchbrand/get-search-goods/a_a_a_MC_a_a_a_a_a_a_a_a.shtml?ts=&discountRate=a&controller=searchBrand&suffix=&word=&currentPage=' + pageNum,
-      url: `${config.localhost}/wxfx.mobileServer/product/getProductList?id=${id}&productCategoryId=${productCategoryId}&openId=${config.testOpenId}&pageNo=${pageNum}`,
-      success: function (res) {
-        console.log(res);
-        if(res.data.data.results.length){
-          callback(res.data.data);
-        }
+      url: `${config.localhost}/product/getProductList`,
+      data:{
+        id: id,
+        productCategoryId: productCategoryId,
+        openId: app.globalData.openId,
+        pageNo: pageNum,
+        hasStock: hasStock,
+        xinpin: this.data.xinpin == '' ? '' : Number(this.data.xinpin),
+        searchText: this.data.searchText,
+        price: price
+      },
+      success:  (res)=> {
+        errorHandler.fail(res).success(()=>{
+          if (res.data.data.results.length) {
+            this.setData({ listResult: true});
+            callback(res.data.data);
+          }
+          else {
+            app.globalData.list = [];
+            this.setData({ 
+              refresh: !this.data.refresh,
+              listResult: false
+            })
+          }
+        })
       }
     })
   },
@@ -139,21 +166,22 @@ Page({
       complexIndex: index
     });
   },
-  filterUnfold: function () {
-    var _this = this;
-    this.setData({ filterPanel: true });
-    wx.request({
-      url: 'http://m.banggo.com/searchbrand/get-filter-info/a_a_a_MC_a_a_a_a_a_a_a_a.shtml?ts=&discountRate=a&controller=searchBrand&suffix=&word=&',
-      success: function (res) {
-        var othersList = res.data.data.others;
-        var category = res.data.data.cate;
-        _this.setData({
-          category: category,
-          othersList: othersList
-        })
-      }
-    })
-  },
+  // 筛选展开
+  // filterUnfold: function () {
+  //   var _this = this;
+  //   this.setData({ filterPanel: true });
+  //   wx.request({
+  //     url: 'http://m.banggo.com/searchbrand/get-filter-info/a_a_a_MC_a_a_a_a_a_a_a_a.shtml?ts=&discountRate=a&controller=searchBrand&suffix=&word=&',
+  //     success: function (res) {
+  //       var othersList = res.data.data.others;
+  //       var category = res.data.data.cate;
+  //       _this.setData({
+  //         category: category,
+  //         othersList: othersList
+  //       })
+  //     }
+  //   })
+  // },
   //滚动事件
   scrollHandler: function (e) {
     var scrollTop = e.detail.scrollTop;
@@ -166,8 +194,8 @@ Page({
     }
     else{
       var itemHeight = this.data.lineItemHeight;
-      var calc = Math.floor((scrollTop + config.screenHeight)/ (itemHeight/config.dpi));
-      console.log(calc);
+      var calc = Math.floor((scrollTop + config.windowHeight)/ (itemHeight/config.dpi));
+      // console.log(calc);
       var currentPageList = [Math.floor(calc / size - 1), Math.floor(calc / size)];
     }
     
@@ -175,8 +203,6 @@ Page({
       this.setData({ currentPageList: currentPageList });
       app.globalData.currentPageList = currentPageList;
     }
-    // console.log(scrollTop);
-    // console.log(calc);
     var arr = this.data.lazyloadList;
     if (arr[calc] == false) {
       for (var i = 0; i < arr.length; i++) {
@@ -193,26 +219,44 @@ Page({
   scrolltoLowerHandler: function () {
     var size = this.data.pageSize;
     var currentPage = this.data.currentPage;
-    var _this = this;
     var list = app.globalData.list;
     var arr = this.data.lazyloadList;
     var newArr = [];
     for (var i = 0; i < size; i++) {
       newArr[i] = false;
     }
-    this.fetchGoodsList(currentPage + 1, function (data) {
+    this.fetchGoodsList(currentPage + 1,  (data)=> {
       var newList = data.results;
       list.push(newList);
       app.globalData.list = list;
-      _this.setData({
+      this.setData({
         lazyloadList: arr.concat(newArr),
         currentPage: currentPage + 1
       });
     });
   },
-  foldPanel: function () {
-    this.setData({
-      filterPanel: false,
+  // foldPanel: function () {
+  //   this.setData({
+  //     filterPanel: false,
+  //   });
+  // },
+  //初始化lazyloadList
+  initLazyloadList:function(data,_this){
+    //创造一个每个值都为false，长度和list一样的数组
+    var length = data.pageSize;
+    _this.setData({ pageSize: length });
+    var arr = [];
+    for (var i = 0; i < length; i++) {
+      if (i < 5) {
+        arr[i] = true
+      }
+      else {
+        arr[i] = false;
+      }
+    }
+    app.globalData.list = [data.results];
+    _this.setData({
+      lazyloadList: arr,
     });
   },
   //切换商品列表展示
@@ -222,5 +266,58 @@ Page({
       switchList: !switchList,
       scrollTop: 0
     });
+  },
+  //切换价格排序
+  priceFilter:function(){
+    var priceFilter = this.data.priceFilter;
+    priceFilter = (priceFilter == 'top'? 'bottom': 'top');
+    this.setData({ 
+      priceFilter: priceFilter,
+      price: (priceFilter == 'top' ? 1 : 2),
+      xinpin: ''
+    });
+    this.fetchSort();
+  },
+  //切换新品排序
+  xinpin: function(){
+    this.setData({ xinpin: !this.data.xinpin});
+    if( this.data.xinpin == true){
+      this.setData({ 
+        priceFilter: '',
+        price: ''
+      });
+    };
+    this.fetchSort();
+  },
+  //切换有货排序
+  youhuo: function(){
+    this.setData({ hasStock: !this.data.hasStock});
+    this.fetchSort();
+  },
+  //筛选条件选中事件
+  fetchSort: function(){
+    this.fetchGoodsList(1, (data) => {
+      this.initLazyloadList(data, this);
+      this.setData({ 
+        refresh: !this.data.refresh,
+        scrollTop: 0
+      });
+    });
+  },
+  //搜索框搜索事件
+  searchHandler: function(e){
+    var value = e.detail.value;
+    this.setData({ searchText: value });
+    this.fetchGoodsList(1,  (data)=>{
+      this.initLazyloadList(data, this);
+      this.setData({ refresh: !this.data.refresh })
+    });
+  },
+  inputWords: function(e){
+    var words = e.detail.value;
+    this.setData({ searchWords: words });
+  },
+  clearSearch: function(){
+    this.setData({ searchWords: ''});
   }
 })

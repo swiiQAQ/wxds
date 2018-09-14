@@ -1,27 +1,48 @@
 <!-- <view class="mask {{maskShow ? '' : 'hidden'}}">
 </view> -->
 <wxs src="../../utils/util.wxs" module="tools" />
+<import src="../template/searchBar.wxml" />
+
+<!-- 搜索框 -->
+<view class="searchBarWrap">
+  <view class="searchBar">
+    <icon class="icomoon search"></icon>
+    <input type="text" placeholder='搜索商品关键字/品类' confirm-type='search'  placeholder-class='sb-placetHolder' bindconfirm='searchHandler' bindinput='inputWords' value="{{searchWords}}"></input>
+    <icon class="icomoon clear" bindtap='clearSearch'></icon>
+  </view>
+</view>
 
 <view class="filterBar" style="background: {{ complexFold ? '#F7F7F7' : '#fff'}}">
   <view class='filterWrap'>
-    <view bindtap='complexHandler' class='complex {{complexFold ? "sortTop" : "sortBottom"}}'>
+    <view class="{{xinpin? 'active': ''}}" bindtap='xinpin'>新品</view>
+    <!-- <view bindtap='complexHandler' class='complex {{complexFold ? "sortTop" : "sortBottom"}}'>
       {{complexText}}<icon class="icomoon bottom-arrow"></icon>
+    </view> -->
+    <view bindtap='priceFilter' class="price-wrap">
+      <text class="{{priceFilter? 'active': ''}}">价格</text>
+      <view class="arrow-box" >
+        <icon class="icomoon bottom-arrow {{priceFilter =='bottom'? 'active':''}}" ></icon>
+        <icon class="icomoon top-arrow {{priceFilter =='top'? 'active':''}}"></icon>
+      </view>
     </view>
-    <view bindtap=''>
-      价格
-      <icon class="icomoon top-arrow"></icon>
-    </view>
-    <view bindtap=''>有货</view>
-    <view bindtap='filterUnfold'>筛选</view>
+    <view class="{{hasStock? 'active': ''}}" bindtap='youhuo'>有货</view>
+    <!-- <view bindtap='filterUnfold'>筛选</view> -->
     <icon class="icomoon {{switchList? 'switch-list' : 'switch-list2'}}" bindtap='switchList'></icon>
   </view>
-  <ul wx:if="{{!complexFold}}" class="complexUnfold">
+  
+  <!-- <ul wx:if="{{!complexFold}}" class="complexUnfold">
     <li bindtap='changeComplex' data-index='1' class="{{complexIndex==1? 'active' : ''}}" data-text='综合'>综合排序</li>
     <li bindtap='changeComplex' data-index='2' class="{{complexIndex==2? 'active' : ''}}" data-text='新品'>新品优先</li>
     <li bindtap='changeComplex' data-index='3' class="{{complexIndex==3? 'active' : ''}}" data-text='销量'>销量从高到低</li>
-  </ul>
+  </ul> -->
 </view>
 <!-- <filterPanel bindFoldHandler="foldPanel" wx:if="{{filterPanel}}" showSelectAll="{{showSelectAll}}" othersList="{{othersList}}"></filterPanel> -->
-<scroll-view scroll-top="{{scrollTop}}" scroll-y bindscroll='scrollHandler' class="goodsListPanel" lower-threshold="80" bindscrolltolower="scrolltoLowerHandler" data-page ="{{tools.formatArray(3)}}" >
-  <goodslist-ul wx:for="{{tools.formatArray(currentPage)}}" listId="{{item}}" list="{{list[index]}}" defaultImg="{{defaultImg}}" lineItemHeight = "{{lineItemHeight}}" blockItemHeight="{{blockItemHeight}}" lazyloadList = "{{lazyloadList}}" currentPageList="{{currentPageList}}" switchList="{{switchList}}"></goodslist-ul>
+<scroll-view scroll-top="{{scrollTop}}px" scroll-y bindscroll='scrollHandler' class="goodsListPanel" lower-threshold="80" bindscrolltolower="scrolltoLowerHandler" data-page ="{{tools.formatArray(3)}}" >
+  <block wx:if="{{listResult}}">
+    <goodslist-ul wx:for="{{tools.formatArray(currentPage)}}" listId="{{item}}" refresh="{{refresh}}" defaultImg="{{defaultImg}}" lineItemHeight = "{{lineItemHeight}}" blockItemHeight="{{blockItemHeight}}" lazyloadList = "{{lazyloadList}}" currentPageList="{{currentPageList}}" switchList="{{switchList}}"></goodslist-ul>
+  </block>
+  <block wx:else >
+    <view class="no-result">暂无商品</view>
+  </block>
+
 </scroll-view>

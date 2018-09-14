@@ -1,8 +1,7 @@
-
+@import '../template/searchBar.wxss';
 page {
   background: #fff;
   height: 100%;
-  display: flex;
   flex-direction: column;
 } 
 .mask{
@@ -32,8 +31,6 @@ background: rgba(0, 0, 0, 0.3);
   position: -webkit-sticky;
   width: 100%;
   color: #ababab;
-  border-top: 1px solid #f1f1f1;
-  border-bottom: 1px solid #f1f1f1;
   box-sizing: border-box;
   font-size: 28rpx;
   background: #fff;
@@ -42,6 +39,8 @@ background: rgba(0, 0, 0, 0.3);
   display: flex;
   height: 80rpx;
   justify-content: space-around;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
 }
 .filterWrap view, .filterWrap i {
   text-align: center;
@@ -75,15 +74,43 @@ background: rgba(0, 0, 0, 0.3);
   color: #eb3c19;
   border-bottom: 5rpx solid #eb3c19;
 }
+.price-wrap{
+  display: flex;
+}
+.arrow-box{
+  display: flex;
+  flex-direction: column;
+    height: 100%;
+  margin-left: 6rpx;
+  width: 30rpx;
+}
 .sortTop:before, .sortBottom::before {
   position: absolute;
   right: -40rpx;
   font-size: 40rpx;
 }
-.top-arrow{
-  transform: rotate(180deg)
+.top-arrow,.bottom-arrow{
+  height: 20rpx;
+  position: relative;
+  margin-top: 8rpx;
 }
-.top-arrow::before{
+.top-arrow{
+  transform: rotate(180deg);
+  margin-top: 22rpx;
+}
+.top-arrow::before,.bottom-arrow::before{
   content: '\e902';
   font-size: 16rpx;
+  position: absolute;
+  left: 0;
+  top:0;
+}
+.active{
+  color: #eb3c19;
+}
+.no-result{
+  margin-top: 460rpx;
+  text-align: center;
+  color: #ababab;
+  font-size: 32rpx;
 }

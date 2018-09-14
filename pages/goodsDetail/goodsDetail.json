@@ -2,6 +2,6 @@
   "enablePullDownRefresh": false,
   "disableScroll": true,
   "usingComponents": {
-    "amount-select": "../../components/amountSelect"
+    "amount-select": "../../components/amountSelect/amountSelect"
   }
 }

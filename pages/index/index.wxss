@@ -1,1 +1,2 @@
-@import '../template/searchBar.wxss'
+@import '../template/searchBar.wxss';
+@import '../goodsList/goodsList';

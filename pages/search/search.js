@@ -1,18 +1,28 @@
 // pages/search/search.js
+var { config } = require('../../utils/config.js');
+var { errorHandler } = require('../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    keywords: ['衬衫', '优惠促销', '连衣裙', '衬衫', '优惠促销', '连衣裙']
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.request({
+      url: `${config.localhost}/product/getHotWords?openId=${app.globalData.openId}`,
+      success: res=>{
+        errorHandler.fail(res).success(()=>{
+          this.setData({ keywords: res.data.data })
+        })
+      }
+    })
   },
 
   /**
@@ -62,5 +72,28 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  inputSearch:function(e){
+    var words = e.detail.value;
+    this.setData({ searchText: words});
+  },
+  selectKeywords: function(e){
+    var index = e.target.dataset.index;
+    var word = e.target.dataset.word;
+    this.setData({
+      id: index
+    });
+    wx.redirectTo({
+      url: '/pages/goodsList/goodsList?searchText=' + word,
+    })
+  },
+  search: function(){
+    var searchText = this.data.searchText;
+    wx.redirectTo({
+      url: '/pages/goodsList/goodsList?searchText=' + searchText,
+    })
+  },
+  clear: function(){
+    this.setData({ searchText: ''});
   }
 })
