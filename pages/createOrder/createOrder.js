@@ -13,7 +13,8 @@ Page({
     config: config,
     shippingFee: 0,
     isOrderPrint: false,
-    invPayee: '个人'
+    invPayee: '个人',
+    picHost: config.picHost
   },
 
   /**
@@ -139,10 +140,13 @@ Page({
           data: {
             openId: app.globalData.openId,
             orderSn: orderSn,
-            money: 1
           },
           success: (res) => {
-            errorHandler.fail(res).success(()=>{
+            errorHandler.fail(res,()=>{
+              wx.navigateTo({
+                url: `/pages/account/orderDetail/orderDetail?orderSn=${orderSn}&fromPage=create`,
+              })
+            }).success(()=>{
               var data = res.data.data;
               wx.requestPayment({
                 'timeStamp': data.timeStamp,
@@ -156,7 +160,7 @@ Page({
                 },
                 'complete': function () {
                   wx.navigateTo({
-                    url: `/pages/orderDetail/orderDetail?orderSn=${orderSn}&fromPage=create`,
+                    url: `/pages/account/orderDetail/orderDetail?orderSn=${orderSn}&fromPage=create`,
                   })
                 }
               })

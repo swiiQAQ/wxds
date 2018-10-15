@@ -1,0 +1,22 @@
+<!--pages/account/expressDetail/expressDetail.wxml-->
+<wxs module="m1">
+  function splitDate(time){
+    return time.split(" ")[0].replace( '-' , '/').replace( '-' , '/');
+  }
+  module.exports.splitDate = splitDate
+</wxs>
+<view wx:for="{{orderShipInfo}}" class="express-list">
+  <view class="express-tp">
+    <text class="distri-no">NO： {{item.orderSn}}</text>
+    <text class="express-no">物流编号： {{item.invoiceNo}}</text>
+  </view>
+  <view class="express-bt" >
+    <view class="express-item" wx:for="{{expressList[index]}}">
+      <view class="bt-front">
+        <i></i>
+        <text>{{m1.splitDate(item.time)}}</text>
+      </view>
+      <text>{{item.mark}}</text>
+    </view>
+  </view>
+</view>

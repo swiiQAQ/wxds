@@ -25,11 +25,14 @@
   margin-left: 38rpx;
   margin-right: 18rpx;
   line-height: 25rpx;
+  display: flex;
+  align-items: center;
 }
 .clear{
   font-size:36rpx;
   color:#A0A1A7;
   line-height:50rpx;
   margin-right:20rpx;
-
+  display: flex;
+  align-items: center;
 }

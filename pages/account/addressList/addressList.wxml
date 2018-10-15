@@ -1,0 +1,39 @@
+<view class="form-block">
+  <radio-group bindchange="changeSelect">
+    <view wx:for="{{addressList}}" class="form-line form-link" bindtap='redirectExpress' data-index="{{index}}">
+      <block wx:if="{{select}}">
+        <radio catchtap='stop' value="{{item.addressId}}-{{item.consignee}}-{{item.mobile}}-{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.address}}-{{item.province}}"></radio>
+      </block>
+      <block wx:else>
+        <icon class="icomoon delete" catchtap='deleteAddress' data-addressId="{{item.addressId}}"></icon>
+      </block>
+      <view class="address-item"> 
+        <view class="user-info">
+          <text class="name">{{item.consignee}}</text>
+          <text class="mobile">{{item.mobile}}</text>
+        </view>
+        <view class="address">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.address}}</view>
+      </view>
+    </view>
+    <!-- <navigator class="express-insert" url="/pages/account/addressInsert/addressInsert"> -->
+    <view class="express-insert" bindtap='insertAddress'>
+      <icon class="icomoon add"></icon>
+      新增收货地址
+    </view>
+      
+    <!-- </navigator> -->
+</radio-group>
+    
+</view>
+<block wx:if="{{select}}">
+  <button type='warn' class="medium-btn" bindtap='selectAddress'>确定</button>
+</block>
+
+<!-- <button type="warn" class="medium-btn">确定</button> -->
+<!-- <view class="section">
+  <picker mode="multiSelector" bindchange="valueChangeHandler" bindcolumnchange="columnChangeHandler" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+    </view>
+  </picker>
+</view> -->

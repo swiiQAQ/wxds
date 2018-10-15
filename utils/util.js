@@ -101,6 +101,7 @@ var errorHandler = {
         })
       }
     }
+    //黑名单
     else if (res.data.code == -1) {
       checkStatus(-1);
     }

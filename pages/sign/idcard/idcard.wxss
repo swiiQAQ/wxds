@@ -1,0 +1,54 @@
+/* pages/sign/idcard/idcard.wxss */
+@import "../../template/formWarn.wxss";
+page{
+  background: #EFEFF4
+}
+.uploadCardWrap{
+  width: 587rpx;
+  height: 368rpx;
+  background: #F9F9FB;
+  border: 1px solid #dbdbdd;
+  border-radius: 5px;
+  margin: 40rpx auto 45rpx;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.uploadCardWrap text{
+  color: #545454;
+}
+view{
+  text-align: center;
+}
+.tips,.description{
+  color: #545454;
+}
+.tips{
+  font-size: 30rpx;
+}
+.description{
+  font-size: 22rpx;
+  margin-top: 27rpx;
+  margin-bottom: 50rpx;
+}
+.medium-btn{
+  margin-top: 50rpx;
+}
+.frontPhoto{
+  max-height: 368rpx;
+  max-width: 100%;
+}
+icon.add{
+  font-size:84rpx;
+  border:5rpx solid #CDCDCD;
+  color:#CDCDCD;
+  border-radius:50%;
+  width:120rpx;
+  height:120rpx;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:20rpx;
+  background: #FCFCFC;
+}

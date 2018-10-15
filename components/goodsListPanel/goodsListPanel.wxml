@@ -11,7 +11,7 @@
         <view>
           <text class="salesPrice">￥{{item.salesPrice}}</text>
           <em class="marketPrice">￥{{item.marketPrice}}</em>
-          <span class="discount">4.9折</span>
+          <span wx:if="{{item.discount}}"  class="discount">{{item.discount}} 折</span>
         </view>
       </li>
     </block>
@@ -20,7 +20,7 @@
         <image mode='widthFix ' data-qw="{{20*listId+index}}" src="{{lazyloadList[20*listId+index] ? item.imgUrl+'?x-oss-process=image/resize,m_fill,w_200,h_200' : defaultImg}}"></image>
         <!-- <image src="{{item.imgUrl}}?x-oss-process=image/resize,m_fill,w_300,h_410"></image> -->
         <view class="list-info">
-          <span class="discount">4.9折</span>
+          <span wx:if="{{item.discount}}" class="discount">{{item.discount}} 折</span>
           <text class="brandName">{{item.brandName}}</text>
           <text class='product-name'>{{item.productName}}</text>
           <view>

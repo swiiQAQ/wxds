@@ -1,0 +1,20 @@
+/* pages/sign/register/register.wxss */
+@import "../../template/formWarn.wxss";
+page{
+  background: #EFEFF4;
+}
+
+.form-line navigator{
+  width: 100%;
+}
+
+.disabled{
+  color: #C3C0C3;
+}
+picker{
+  flex-grow: 1;
+  height: 100%;
+}
+picker .picker{
+  height: 88rpx;
+}

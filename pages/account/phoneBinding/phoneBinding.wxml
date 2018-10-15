@@ -1,0 +1,34 @@
+<!--pages/account/phoneBinding/phoneBinding.wxml-->
+<import src="../template/formWarn.wxml" />
+<template wx:if="{{warnText}}" is="formWarn" data="{{text: warnText}}" />
+
+<view class="unbind-process">
+  <text class="{{unbind? '' : 'active'}}">解绑手机</text>
+  <text class="{{unbind? 'active' : ''}}" >绑定新手机</text>
+</view>
+<view wx:if="{{unbind}}" class="form-block">
+  <view class="form-line">
+    <text>手机号</text>
+    <input placeholder='请输入需要更换的新手机号' type="number" bindinput="validate" data-name="mobile" placeholder-class="placeholder-input"></input>
+  </view>
+  <view class="form-line">
+    <text>验证码</text>
+    <input placeholder-class = "placeholder-input" bindinput="validate" data-name="num"></input>
+    <span wx:if="{{disabledSend}}" class="sendCode">重新发送({{seconds}}s)</span>
+    <span wx:else class="sendCode" bindtap="bindCode">发送</span>
+  </view>
+  <button class="medium-btn" type="warn" bindtap='bindPhone'>绑定手机</button>
+</view>
+<view wx:else  class="form-block">
+  <view class="form-line">
+    <text>手机号</text>
+    <input bindinput="validate" data-name='mobile' placeholder='请输入登录所用手机号'  placeholder-class = "placeholder-input"></input>
+  </view>
+  <view class="form-line">
+    <text>验证码</text>
+    <input placeholder-class="placeholder-input" bindinput="validate" data-name='num'></input>
+    <span wx:if="{{disabledSend}}" class="sendCode">重新发送({{seconds}}s)</span>
+    <span wx:else class="sendCode" bindtap="unbindCode">发送</span>
+  </view>
+  <button class="medium-btn" type="warn" bindtap='unbindPhone'>解除绑定</button>
+</view>

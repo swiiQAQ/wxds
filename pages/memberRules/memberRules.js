@@ -81,7 +81,7 @@ Page({
   },
   redirect: function(){
     wx.navigateTo({
-      url: '/pages/register/register',
+      url: '/pages/sign/register/register',
     })
   }
 })

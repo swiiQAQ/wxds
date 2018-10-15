@@ -1,0 +1,33 @@
+<!--pages/sign/idcard/idcard.wxml-->
+<import src="../../template/formWarn.wxml" />
+<template wx:if="{{warnText}}" is="formWarn" data="{{text: warnText}}" />
+<view class="uploadCardWrap" bindtap='uploadFront'>
+    <block wx:if="{{idCard0}}">
+      <image mode="aspectFit" class="frontPhoto" src="{{idCard0}}"></image>
+    </block>
+    <block wx:else> 
+      <icon class="add icomoon"></icon>
+      <text>身份证正面照片</text>
+    </block>
+</view>
+<view class="uploadCardWrap" bindtap='uploadBack'>
+    <block wx:if="{{idCard1}}">
+      <image mode="aspectFit" class="frontPhoto" src="{{idCard1}}"></image>
+    </block>
+    <block wx:else> 
+      <icon class="add icomoon"></icon>
+      <text>身份证反面照片</text>
+    </block>
+</view>
+<view class="tips">*温馨提示： 请上传本人有效二代身份证</view>
+<view class="description">
+  <text>材料审核需要3个工作日，如有疑问</text>
+  <text>
+    请拨打客服热线
+    <span class="phone" bindtap='callPhone'>{{phone}}</span>
+  </text>
+</view>
+<button class='medium-btn' bindtap='checkIdcard' type='warn'>
+  确定
+</button>
+

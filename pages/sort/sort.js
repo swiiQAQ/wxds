@@ -106,12 +106,6 @@ Page({
         }
       })
     } 
-    
-    // var secondCategoryInit = mock.secondCategory;
-   
-    else{
-      
-    }
   },
   changeSecondCategory:function(e){
     var id = e.target.dataset.id;

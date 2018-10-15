@@ -11,7 +11,7 @@ Page({
   data: {
     //商品主图当前图片index
     galleryIndex: 0,
-    //图文详情
+    //图文详情  
     tuwen: '',
     //傻瓜品信息
     goodsAttrs: '',
@@ -28,7 +28,9 @@ Page({
     //尺码颜色无库存
     noStockArray: [],
     amount: 1,
-    scrollHeight: ''
+    scrollHeight: '',
+    picHost: config.picHost,
+    canScrollY: true
   },
 
   /**
@@ -76,7 +78,11 @@ Page({
             brandInfo: data.brandInfo,
             salePoint: data.salePoint,
             sizeTable: JSON.parse(data.sizeTable),
-            sizePicture: data.sizePicture
+            sizePicture: data.sizePicture,
+            //六位码
+            productSysCode: data.productSysCode,
+            //分类
+            categories: data.categories
           })
         })
       }
@@ -145,14 +151,15 @@ Page({
     }
     this.setData({
       mask: true,
-      flashFlag: false
+      flashFlag: false,
+      canScrollY: false,
     });
   },
 
   setPreviewImg: function(colorList) {
     var previewImg = [];
     colorList.forEach((value, index) => {
-      previewImg.push('http://img.banggo.com' + value.colorImage);
+      previewImg.push( config.picHost + value.colorImage);
     })
     this.setData({
       previewImg: previewImg
@@ -198,7 +205,7 @@ Page({
         colorId: colorId,
         colorName: colorName,
         colorCode: colorCode,
-        colorImage: 'http://pic.banggo.com' + colorImage,
+        colorImage: config.picHost + colorImage,
       });
     } else {
       this.setData({
@@ -263,7 +270,7 @@ Page({
   closeMask: function() {
     this.setData({
       mask: false,
-      canScrollY: true
+      canScrollY: true,
     });
   },
   //确认操作
@@ -345,6 +352,7 @@ Page({
       })
     }else{
       this.setData({
+        canScrollY: false,
         mask: true,
         flashFlag: true
       });
@@ -372,5 +380,8 @@ Page({
   },
   callPhone: function(){
     callCustomService();
+  },
+  tuwenLink: function(e){
+    this.setData({ scrollId: e.target.dataset.scrollid});
   }
 })

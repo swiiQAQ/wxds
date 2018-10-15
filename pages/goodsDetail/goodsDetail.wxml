@@ -56,7 +56,7 @@
     </view>
   </view>
 </view>
-<scroll-view class="goods-detail" scroll-y style="height:{{scrollHeight}}px">
+<scroll-view class="goods-detail" scroll-into-view='{{scrollId}}' scroll-y="{{canScrollY}}" style="height:{{scrollHeight}}px">
   <view class="gallerySwiperWrap">
     <swiper class="gallerySwiper" bindchange="changeGalleryIndex">
       <swiper-item wx:for="{{galleryList}}">
@@ -85,23 +85,23 @@
   </view>
   <view class="detail-ct">
     <view class="ct-text">
-      <text>图文详情</text>
-      <text>商品信息</text>
+      <text bindtap='tuwenLink' data-scrollid='tuwen'>图文详情</text>
+      <text bindtap='tuwenLink' data-scrollid='productTextInfo'>商品信息</text>
     </view>
   </view>
   <view id="tuwen">
     <block wx:if="{{tuwen[2]}}">
-      <image mode="widthFix" src="http://s.banggo.com/pub7/images/mbshop/detailtitle/mtzs_wap.png"></image>
-      <image mode='widthFix' wx:for="{{tuwen[2]}}" src="{{'http://pic.banggo.com'+item.imageUrl}}"></image>
+      <image mode="widthFix" src="{{picHost}}/sources/images/common/mtzs_wap.png"></image>
+      <image mode='widthFix' wx:for="{{tuwen[2]}}" src="{{picHost+item.imageUrl}}"></image>
     </block>
     <block wx:if="{{tuwen[4]}}">
-      <image mode='widthFix' src="http://s.banggo.com/pub7/images/mbshop/detailtitle/xjzs_wap.png"></image>
-      <image mode="widthFix" wx:for="{{tuwen[4]}}" src="{{'http://pic.banggo.com'+item.imageUrl}}"></image>
+      <image mode='widthFix' src="{{picHost}}/sources/images/common/xjzs_wap.png"></image>
+      <image mode="widthFix" wx:for="{{tuwen[4]}}" src="{{picHost+item.imageUrl}}"></image>
     </block>
     <block wx:if="{{tuwen[3]}}">
-      <image mode="widthFix" src="http://s.banggo.com/pub7/images/mbshop/detailtitle/ysxz_wap.png"></image>
+      <image mode="widthFix" src="{{picHost}}/sources/images/common/ysxz_wap.png"></image>
       <view wx:for="{{tuwen[3]}}">
-        <image mode="widthFix" src="{{'http://pic.banggo.com'+item.imageUrl}}"></image>
+        <image mode="widthFix" src="{{picHost+item.imageUrl}}"></image>
         <text style="font-size:26rpx;">{{item.colorName}}</text>
       </view>
     </block>
@@ -113,7 +113,7 @@
           </td>
         </tr>
       </table> -->
-      <image mode="widthFix" src="http://s.banggo.com/pub7/images/mbshop/detailtitle/cmgg_wap.png"></image>
+      <image mode="widthFix" src="{{picHost}}/sources/images/common/cmgg_wap.png"></image>
       <view class="sizeTable">
         <view class="sizeColumn" wx:for="{{sizeTable}}">
           <view class="sizeItem" wx:for="{{item}}">{{item}}</view>
@@ -121,25 +121,45 @@
       </view>
     </block>
     <block wx:if="{{sizePicture}}">
-      <image mode="widthFix" src='http://s.banggo.com/pub7/images/mbshop/detailtitle/clff_wap.png'></image>
-      <image mode="widthFix" src='{{"http://pic.banggo.com/"+sizePicture}}'></image>
+      <image mode="widthFix" src='{{picHost}}/sources/images/common/clff_wap.png'></image>
+      <image mode="widthFix" src='{{picHost+"/"+sizePicture}}'></image>
     </block>
   </view>
   <block wx:if="{{goodsAttrs}}">
     <view id="productTextInfo" class="productTextInfo">
-      <image mode="widthFix" src='http://s.banggo.com/pub7/images/mbshop/detailtitle/spxx_wap.png'></image>
+      <image mode="widthFix" src='{{picHost}}/sources/images/common/spxx_wap.png'></image>
+      <!-- 拼接商品信息 -->
+      <view class="GoodsAttrs">
+        <b>品牌：</b>
+        <span>{{brandName}}</span>
+      </view>
+      <view class="GoodsAttrs">
+        <b>款名：</b>
+        <span>{{productName}}</span>
+      </view>
+      <view class="GoodsAttrs">
+        <b>款号：</b>
+        <span>{{productSysCode}}</span>
+      </view>
+      <view class="GoodsAttrs">
+        <b class="">分类：</b>
+        <block wx:for="{{categories}}">
+          <span wx:if="{{index>0}}"> > </span>
+          <span>  {{item.categoryName}} </span>
+        </block>
+      </view>  
       <view wx:for="{{goodsAttrs}}">
-        <p class="GoodsAttrs">
-          <b class="">{{item.attrName}}:</b>
+        <p wx:if="{{item.attrValue[0]}}" class="GoodsAttrs">
+          <b class="">{{item.attrName}}：</b>
           <span>{{item.attrValue[0]}}</span>
         </p>
       </view>
       <view>
-        <image mode='widthFix' src='http://s.banggo.com/pub7/images/mbshop/detailtitle/ppjs_wap.png'></image>
+        <image mode='widthFix' src='{{picHost}}/sources/images/common/ppjs_wap.png'></image>
         <text>{{brandInfo}}</text>
       </view>
       <view>
-        <image mode='widthFix' src='http://s.banggo.com/pub7/images/mbshop/detailtitle/bjtj_wap.png'></image>
+        <image mode='widthFix' src='{{picHost}}/sources/images/common/bjtj_wap.png'></image>
         <text>{{salePoint}}</text>
       </view>
     </view>

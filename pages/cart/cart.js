@@ -10,7 +10,8 @@ Page({
   data: {
     //手机高度
     // checkList: [],
-    scrollHeight: ''
+    scrollHeight: '',
+    picHost: config.picHost
   },
 
   /**

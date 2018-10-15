@@ -1,26 +1,38 @@
 {
   "pages": [
     "pages/memberRules/memberRules",
-    "pages/register/register",
-    "pages/cashPledge/cashPledge",
     "pages/sort/sort",
     "pages/user/user",
-    "pages/phoneBinding/phoneBinding",
-    "pages/idcard/idcard",
     "pages/cart/cart",
     "pages/createOrder/createOrder",
     "pages/goodsDetail/goodsDetail",
     "pages/goodsList/goodsList",
-    "pages/orderList/orderList",
     "pages/index/index",
     "pages/logs/logs",
     "pages/status/status",
-    "pages/search/search",
-    "pages/accountSetting/accountSetting",
-    "pages/orderDetail/orderDetail",
-    "pages/addressInsert/addressInsert",
-    "pages/addressList/addressList",
-    "pages/expressDetail/expressDetail"
+    "pages/search/search"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/account",
+      "pages": [
+        "orderDetail/orderDetail",
+        "addressInsert/addressInsert",
+        "addressList/addressList",
+        "expressDetail/expressDetail",
+        "accountSetting/accountSetting",
+        "orderList/orderList",
+        "phoneBinding/phoneBinding"
+      ]
+    },
+    {
+      "root":"pages/sign/",
+      "pages": [
+        "register/register",
+        "cashPledge/cashPledge",
+        "idcard/idcard"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "light",

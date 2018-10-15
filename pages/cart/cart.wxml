@@ -5,7 +5,7 @@
     <view wx:for="{{cartItems}}" class="goods-item {{item.errorCode? 'disabled-good': ''}}" >
       <text wx:if="{{item.errorCode}}" class="disabled-text">失效</text>
       <checkbox wx:else color="#fff" data-id="{{item.id}}" data-index="{{index}}" data-checkstatus="{{item.checkStatus}}" checked="{{item.checkStatus == 1? true: false}}" catchtap='changeSelectHandler'></checkbox>
-      <image bindtap='linkGoods' data-code='{{item.goodsList[0].goodsSn}}' src="http://pic.banggo.com{{item.goodsList[0].imageUrl}}"></image>
+      <image bindtap='linkGoods' data-code='{{item.goodsList[0].goodsSn}}' src="{{picHost+item.goodsList[0].imageUrl}}"></image>
       <view class="goods-info" data-code='{{item.goodsList[0].goodsSn}}'>
         <text class="goods-name">{{item.goodsList[0].brandName}} {{item.goodsList[0].goodsName}}</text>
         <view class="sizeColor">

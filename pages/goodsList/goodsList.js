@@ -34,7 +34,7 @@ Page({
       fabrics: '',
     },
     //默认图片
-    defaultImg: 'http://s.banggo.com/pub7/images/mbshop/common/banggo.png',
+    defaultImg: 'http://pic.bonwego.com/sources/images/common/default.png',
     //
     lazyloadList: [],
     //一页有多少条数据
@@ -54,9 +54,12 @@ Page({
     hasStock: '',
     id: '',
     productCategoryId: '',
+    //强制组件刷新，list存在全局变量中，改变后组件不刷新
     refresh: false,
     //商品列表是否有结果
-    listResult: false
+    listResult: false,
+    //如果一次性拉取小于pagesize，下滑不再拉取数据
+    isScrollHandler: true
   },
 
   /**
@@ -122,7 +125,6 @@ Page({
     var productCategoryId = this.data.productCategoryId;
     pageNum = pageNum ? pageNum : 1;
     var hasStock = this.data.hasStock == ''?'':Number(this.data.hasStock);
-    // var xinpin = this.data.xinpin == '' ? '' : Number(this.data.xinpin);
     var price = this.data.price == '' ? '' : Number(this.data.price);
     wx.request({
       url: `${config.localhost}/product/getProductList`,
@@ -134,19 +136,34 @@ Page({
         hasStock: hasStock,
         xinpin: this.data.xinpin == '' ? '' : Number(this.data.xinpin),
         searchText: this.data.searchText,
-        price: price
+        price: price,
+        rows: 20
       },
       success:  (res)=> {
         errorHandler.fail(res).success(()=>{
-          if (res.data.data.results.length) {
-            this.setData({ listResult: true});
-            callback(res.data.data);
+          //如果是此分页存在数据或者曾经存在数据都可以排除掉一开始的查询无结果
+          if (res.data.data.results.length||res.data.data.pageNo!==1) {
+            this.setData({ 
+              listResult: true,
+              scrollY: true,
+            });
+            //如果此分页的数据小于pagesize代表是最后一页，或者这一页没有数据，不再创造节点并且阻止下拉事件
+            if(res.data.data.results.length<this.data.pageSize){ 
+              callback(res.data.data);
+              this.setData({ isScrollHandler: false});
+            }
+            else {
+              callback(res.data.data);
+            }
           }
           else {
             app.globalData.list = [];
+            //商品列表在有商品的时候滚到下面再进行查询无结果时，可以往下滚动一段距离，scrollY禁止滚动，保持一屏
             this.setData({ 
               refresh: !this.data.refresh,
-              listResult: false
+              listResult: false,
+              scrollTop: 0,
+              scrollY: false
             })
           }
         })
@@ -187,14 +204,16 @@ Page({
     var scrollTop = e.detail.scrollTop;
     var size = this.data.pageSize;
     var oldPageList = app.globalData.currentPageList;
+    //块状分布
     if(!this.data.switchList){
       var itemHeight = this.data.blockItemHeight;
-      var calc = Math.floor((scrollTop + itemHeight * 2 / config.dpi) / (itemHeight / config.dpi) * 2) + 1;
+      var calc = Math.floor((scrollTop + itemHeight * 2 / config.dpi) / (itemHeight / config.dpi) * 2)+1;
       var currentPageList = [Math.floor(calc / size - 1), Math.floor(calc / size)];
     }
+    // 条状分布
     else{
       var itemHeight = this.data.lineItemHeight;
-      var calc = Math.floor((scrollTop + config.windowHeight)/ (itemHeight/config.dpi));
+      var calc = Math.floor((scrollTop + app.globalData.windowHeightWithoutBar)/ (itemHeight/config.dpi));
       // console.log(calc);
       var currentPageList = [Math.floor(calc / size - 1), Math.floor(calc / size)];
     }
@@ -204,7 +223,8 @@ Page({
       app.globalData.currentPageList = currentPageList;
     }
     var arr = this.data.lazyloadList;
-    if (arr[calc] == false) {
+    //避免重复赋值
+    if (arr[calc] !== true) {
       for (var i = 0; i < arr.length; i++) {
         if (i < calc) {
           arr[i] = true;
@@ -247,6 +267,7 @@ Page({
     _this.setData({ pageSize: length });
     var arr = [];
     for (var i = 0; i < length; i++) {
+      //第一版前四个先展示
       if (i < 5) {
         arr[i] = true
       }
@@ -262,7 +283,9 @@ Page({
   //切换商品列表展示
   switchList:function(){
     var switchList = this.data.switchList;
+    app.globalData.currentPageList = [0, 1];
     this.setData({ 
+      currentPageList: [0,1],
       switchList: !switchList,
       scrollTop: 0
     });
@@ -296,28 +319,40 @@ Page({
   },
   //筛选条件选中事件
   fetchSort: function(){
+    app.globalData.list = [];
     this.fetchGoodsList(1, (data) => {
       this.initLazyloadList(data, this);
-      this.setData({ 
-        refresh: !this.data.refresh,
-        scrollTop: 0
-      });
+      this.clearProperties();
     });
   },
   //搜索框搜索事件
   searchHandler: function(e){
     var value = e.detail.value;
     this.setData({ searchText: value });
+    app.globalData.list = [];
     this.fetchGoodsList(1,  (data)=>{
+      
       this.initLazyloadList(data, this);
-      this.setData({ refresh: !this.data.refresh })
+      this.clearProperties();
+      
     });
   },
   inputWords: function(e){
     var words = e.detail.value;
-    this.setData({ searchWords: words });
+    this.setData({ searchText: words });
   },
   clearSearch: function(){
-    this.setData({ searchWords: ''});
+    this.setData({ searchText: ''});
+  },
+  //每进行一次刷新商品列表，各项属性清空
+  clearProperties: function(){
+    app.globalData.currentPageList = [0, 1];
+    this.setData({
+      isScrollHandler: true,
+      refresh: !this.data.refresh,
+      scrollTop: 0,
+      currentPageList: [0, 1],
+      currentPage: 1
+    });
   }
 })

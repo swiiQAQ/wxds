@@ -62,6 +62,7 @@ color: #919191;
  display: flex;
  padding-left: 30rpx;
  box-sizing: border-box;
+ padding-top: 20rpx;
 }
 .line-list image{
   width: 200rpx;
@@ -71,6 +72,8 @@ color: #919191;
 .line-list .list-info{
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  border-bottom: 1px solid #eaeaea;
 }
 .line-list .discount{
   margin-bottom: 20rpx;

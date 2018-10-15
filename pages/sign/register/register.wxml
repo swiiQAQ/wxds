@@ -1,0 +1,54 @@
+<!--pages/sign/register/register.wxml-->
+<import src="../../template/formWarn.wxml" />
+<template wx:if="{{warnText}}" is="formWarn" data="{{text: warnText}}" />
+<form bindsubmit="register" bindsubmit="register">
+  <view class="form-block">
+    <view class="form-line">
+      <text>姓名</text>
+      <input data-name="name" bindinput="validate" placeholder='请输入完整姓名' disabled='{{disabledChange ?  true : false}}' placeholder-class="placeholder-input" value="{{name}}" class="{{disabledChange? 'disabled' : ''}}"></input>
+    </view>
+  </view>
+  <view class="form-block">
+    <view class="form-line">
+      <text>国家/地区</text>
+      <input disabled value='中国' placeholder-class="placeholder-input"></input>
+    </view>
+    <view class="form-line">
+      <text>+86</text>
+      <input bindinput="validate" data-name="mobile" placeholder='请填写手机号码' type='number' disabled='{{disabledChange ? true: false}}' placeholder-class="placeholder-input" value="{{mobile}}" class="{{disabledChange? 'disabled' : ''}}"></input>
+    </view>
+    <view class="form-line">
+      <text>验证码</text>
+      <input bindinput="validate" data-name="num" placeholder='请输入手机验证码' type='number' disabled='{{disabledChange ? true: false}}' placeholder-class="placeholder-input" value="{{num}}" class="{{disabledChange? 'disabled' : ''}}"></input>
+      <block wx:if="{{disabledChange}}"></block>
+      <span wx:elif="{{!disabledSend}}" class="sendCode" bindtap='sendCode'>发送</span>
+      <span wx:else class="sendCode" >重新发送({{seconds}}s)</span>
+    </view>
+  </view>
+  <view class="form-block">
+    <view class="form-line">
+      <text>身份证</text>
+      <input bindinput="validate" type='number' data-name="idCard" placeholder='请输入有效身份证号码' placeholder-class="placeholder-input"></input>
+    </view>
+    <view class="form-line">
+      <text>有效期</text>
+      <!-- <input placeholder='请选择月份/年份' placeholder-class="placeholder-input"></input> -->
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <view class="picker">
+          <block wx:if="{{expire}}">
+            {{multiArray[0][multiIndex[0]]}}/{{multiArray[1][multiIndex[1]]}}
+          </block>
+        </view>
+      </picker>
+      <svg src="/images/home.svg"></svg>
+    </view>
+    <view class="form-line">
+      <navigator url="/pages/sign/idcard/idcard">
+        <text>上传有效身份证照片</text>
+      </navigator>
+    </view>
+  </view>
+  <button form-type='submit' class="medium-btn warn" type="warn">
+    下一步
+  </button>
+</form>

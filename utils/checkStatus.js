@@ -9,7 +9,7 @@ var checkStatus = function(status) {
   } 
   else if (status == 0) {
     wx.redirectTo({
-      url: '/pages/register/register',
+      url: '/pages/sign/register/register',
     })
   }else if (status == 1) {
     var data = {
@@ -27,7 +27,7 @@ var checkStatus = function(status) {
     redirectStatus(data);
   } else if (status == 2 || status == 11) {
     wx.redirectTo({
-      url: '/pages/cashPledge/cashPledge?status=' + status,
+      url: '/pages/sign/cashPledge/cashPledge?status=' + status,
     })
   } else if (status == 12 || status == 3) {
     wx.switchTab({

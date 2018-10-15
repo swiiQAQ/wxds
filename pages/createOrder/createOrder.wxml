@@ -1,7 +1,7 @@
 <!--pages/createOrder/createOrder.wxml-->
 <scroll-view scroll-y style="height:{{scrollHeight}}px">
   <block wx:if="{{addressId}}">
-  <navigator class="address form-link" url="/pages/addressList/addressList?select=true">
+  <navigator class="address form-link" url="/pages/account/addressList/addressList?select=true">
     <view class="user-info">
       <text>{{name}}</text>
       <text class="mobile">{{mobile}}</text>
@@ -10,14 +10,14 @@
   </navigator>
   </block>
   <block wx:else>
-    <navigator class="addressEmpty" url="/pages/addressList/addressList?select=true">
+    <navigator class="addressEmpty" url="/pages/account/addressList/addressList?select=true">
       <icon class="icomoon add"></icon>
       请选择地址
     </navigator>
   </block>
   <view class="goods-list">
     <view wx:for="{{cartItems}}" class="goods-item">
-      <image src="http://pic.banggo.com{{item.goodsList[0].imageUrl}}"></image>
+      <image src="{{picHost+item.goodsList[0].imageUrl}}"></image>
       <view class="goods-info">
         <text class="goods-name">{{item.goodsList[0].goodsName}}</text>
         <view class="sizeColor">

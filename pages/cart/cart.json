@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "购物袋",
   "enablePullDownRefresh": false,
   "disableScroll": true,
   "usingComponents": {

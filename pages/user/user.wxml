@@ -4,34 +4,34 @@
   <open-data type="userAvatarUrl" mode='widthFix' class="avatar"></open-data>
   <text wx:if="{{name}}">{{name}}</text>
   <open-data wx:else type="userNickName" mode='widthFix' class="avatar"></open-data>
-  <navigator url="/pages/accountSetting/accountSetting" class="account-setting">
+  <navigator url="/pages/account/accountSetting/accountSetting" class="account-setting">
     <icon class="icomoon setting"></icon>
     <span>账号管理</span>
   </navigator>
 </view>
 <view>
-  <navigator url="/pages/orderList/orderList">
+  <navigator url="/pages/account/orderList/orderList">
     <view class="myOrder form-link">
       <text>我的订单</text>
       <span>查看全部订单</span>
     </view>
   </navigator>
   <view class="order-grid">
-    <navigator url='/pages/orderList/orderList?state=1' class="order-item-grid">
+    <navigator url='/pages/account/orderList/orderList?state=1' class="order-item-grid">
       <view style="position:relative">
         <icon class="icomoon pay-yet "></icon>
         <i class="redDot" wx:if="{{unPay}}">{{unPay}}</i>
       </view>
       <text>待付款</text>
     </navigator>
-      <navigator url='/pages/orderList/orderList?state=2' class="order-item-grid">
+      <navigator url='/pages/account/orderList/orderList?state=2' class="order-item-grid">
         <view style="position:relative">
           <icon class="icomoon deliver-yet"></icon>
           <i class="redDot" wx:if="{{unSend}}">{{unSend}}</i>
         </view>
         <text>待发货</text>
       </navigator>
-      <navigator url='/pages/orderList/orderList?state=3' class="noborder order-item-grid">
+      <navigator url='/pages/account/orderList/orderList?state=3' class="noborder order-item-grid">
         <view style="position:relative">
           <icon class="icomoon reach-yet"></icon>
           <i class="redDot" wx:if="{{unGet}}">{{unGet}}</i>
@@ -42,7 +42,7 @@
 </view>
 
 <view class="user-opr">
-  <navigator url="/pages/addressList/addressList">
+  <navigator url="/pages/account/addressList/addressList">
     <text class="form-link">管理收货地址</text>
   </navigator>
   <navigator>
