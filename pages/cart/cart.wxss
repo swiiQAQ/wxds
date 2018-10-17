@@ -156,6 +156,7 @@ page{
   width: 280rpx;
   height: 88rpx;
   margin-right: 20rpx;
+  line-height: 88rpx;
 }
 .selectAll{
   margin-left: 30rpx;
