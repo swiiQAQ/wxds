@@ -28,7 +28,7 @@
   <view class="form-block">
     <view class="form-line">
       <text>身份证</text>
-      <input bindinput="validate" type='number' data-name="idCard" placeholder='请输入有效身份证号码' placeholder-class="placeholder-input"></input>
+      <input bindinput="validate" data-name="idCard" placeholder='请输入有效身份证号码' placeholder-class="placeholder-input"></input>
     </view>
     <view class="form-line">
       <text>有效期</text>
