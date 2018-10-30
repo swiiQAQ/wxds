@@ -85,7 +85,14 @@ var regValidate= (properties,context)=>{
 }
 var validate = (context,e) =>{
   var name = e.target.dataset.name;
-  context.setData({ [name]: e.detail.value});
+  var value = e.detail.value;
+  if (name == 'mobile') {
+    value = value.replace(/\D/g, '');
+    if (/^86/.test(value)) {
+      value = value.slice(2, 13);
+    }
+  }
+  context.setData({ [name]: value });
 }
 
 module.exports = {

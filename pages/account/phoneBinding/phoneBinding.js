@@ -70,9 +70,12 @@ Page({
               title: '解绑成功',
             })
             setTimeout(()=>{
+              clearInterval(this.timer);
               this.setData({
                 unbind: true,
                 disabledSend: false,
+                mobile:'',
+                seconds: 60
               })
             },1000)
           })
@@ -159,7 +162,7 @@ Page({
     this.setData({
       disabledSend: true
     })
-    var timer = setInterval(() => {
+    this.timer = setInterval(() => {
       if (this.data.seconds > 1) {
         this.setData({ seconds: this.data.seconds - 1 });
       } else {

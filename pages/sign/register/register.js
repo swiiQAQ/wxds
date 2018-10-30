@@ -1,6 +1,6 @@
 // pages/sign/register/register.js
 var app = getApp();
-var { submitValidate, regValidate} = require('../../../utils/validate.js');
+var { submitValidate, regValidate, validate} = require('../../../utils/validate.js');
 var {config} = require('../../../utils/config.js');
 var { errorHandler } = require('../../../utils/util.js');
 
@@ -138,18 +138,8 @@ Page({
     }
   },
   validate: function(e){
-    this.setData({
-      [e.currentTarget.dataset.name]: e.detail.value
-    });
-    // var result = regValidate(e.currentTarget.dataset.name,this);
-    // if(result!==true){
-    //   this.setData({ warnText: result});
-    // }
-    // else{
-    //   this.setData({ 
-    //     warnText: '',
-    //   });
-    // }
+    validate(this, e);
+    
   },
   bindMultiPickerChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)

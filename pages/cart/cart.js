@@ -84,7 +84,7 @@ Page({
               for (var key in cartMap) {
                 this.setData({
                   cartItems: cartMap[key].cartItems,
-                  totalPrice: cartMap[key].totalPrice,
+                  totalPrice: res.data.data.totalPrice,
                   goodsTotalNumber: cartMap[key].goodsTotalNumber,
                   checkStatus: res.data.data.checkStatus
                 })
