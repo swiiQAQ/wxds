@@ -1,0 +1,74 @@
+<!--pages/canvasTest/canvasTest.wxml-->
+<wxs src="../../utils/util.wxs" module="tools"></wxs>
+<wxs module="tools2">
+  var antiIndexOf = function(list,value){
+    for(var i = 0; i< list.length; i++){
+      if(list[i] == value){
+        console.log(i);
+        return i+1;
+      }
+    }
+  }
+  var addPrice = function(price,addPrice){
+    return Number(price)+addPrice;
+  }
+  module.exports={
+    antiIndexOf: antiIndexOf,
+    addPrice: addPrice
+  }
+</wxs>
+    
+  <view class="goods-info">
+    <p>商品信息</p>
+    <view class="goods-detail">
+      <text class='product-name'>{{productName}}</text>
+      <view>
+        <text>尺码：</text>
+        <text>卖点：{{sellerPoint}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="price-wrap">
+    <text class="seller-price">零售价 ￥{{tools2.addPrice(price,addPrice)}}</text>
+    <text class='origin-price'>(分销价：￥{{price}})</text>
+    <span class='edit' bindtap='editHandler'>编辑</span>
+  </view>
+  <view class="edit-panel {{editPanel?'show':''}}">
+    <view>
+      <input type='Number' placeholder='请输入期望涨幅' placeholder-class='wish-add' value="{{addPrice}}" bindinput='inputHandler'></input>
+      <view class='add-amount-wrap'>
+        <text wx:for="{{selectedAmountList}}" bindtap='selectAmountHandler' class="{{selectedAmountIndex == index? 'current-add':''}}" data-index='{{index}}'>+￥{{item}}</text>
+      </view>
+    </view>
+    <view class="confirm-add" bindtap='confirmHandler'>确定</view>
+  </view>
+  <view class="select-wrap">
+    <view class="half-mask {{editPanel?'show':''}}" catchtap='closeMask'></view>
+    <view>
+      <span class='select-text'>请选择图片</span>
+      <span class='select-count'>{{selectedList.length}}/6</span>
+    </view>
+    <view class="gallery-list">
+      <view wx:for="{{defaultGallery}}" class="img-wrap" bindtap='selectImg' data-index="{{index}}">
+        <image mode='aspectFit' src='{{item}}'></image>
+        <block wx:if="{{tools.indexOf(selectedList,index)}}">
+          <span class="selected-icon">
+            {{tools2.antiIndexOf(selectedList, index)}}
+          </span>
+          <view class="selected-mask"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+<view class="sticky-bottom">
+  <text bindtap='clearSelectedHandler'>清空</text>
+  <button type='warn' bindtap='createCanvas'>下载拼图</button>
+</view>
+<!-- mask -->
+<view class='mask {{maskShow? "show": ""}}' catchtap='closeMask'>
+  <view class='canvasPreview' catchtap='holdMask'>
+    <canvas style="width: 554rpx;height: 912rpx;" canvas-id='myCanvas'></canvas>
+    <view class='save-text' bindtap='saveImg'>保存到本地</view>
+  </view>
+</view>

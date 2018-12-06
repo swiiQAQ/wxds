@@ -32,13 +32,17 @@ Page({
     picHost: config.picHost,
     canScrollY: true
   },
-
+  onShareAppMessage:function(res){
+    return{
+      imageUrl: 'http://pic.banggo.com/sources/images/goods/MC/519888/519888_00.jpg?x-oss-process=image/resize,m_fill,w_300,h_410'
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.setData({
-      scrollHeight: app.globalData.windowHeightWithoutBar - 110 / config.dpi
+      scrollHeight: app.globalData.windowHeightWithoutBar - 110 / config.dpi,
     })
     var productCode = options.productCode;
     wx.request({
@@ -100,7 +104,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({ mask: false})
   },
 
   /**
@@ -145,9 +149,14 @@ Page({
     });
   },
   //展开弹窗
-  showMask: function() {
-    if(this.data.soldout){
-      return;
+  showMask: function(e) {
+    // if(this.data.soldout){
+    //   return;
+    // }
+    var type = e.currentTarget.dataset.type;
+    this.setData({ type: '' });
+    if(type){
+      this.setData({ type: 'download'});
     }
     this.setData({
       mask: true,
@@ -383,5 +392,16 @@ Page({
   },
   tuwenLink: function(e){
     this.setData({ scrollId: e.target.dataset.scrollid});
-  }
+  },
+  drawCanvas: function(){
+    wx.navigateTo({
+      url: '/pages/canvasTest/canvasTest?data='+this.data.productCode,
+    })
+  },
+  // 拼图下载
+  download: function(){
+    wx.navigateTo({
+      url: `/pages/canvasTest/canvasTest?price=${this.data.salesPrice}&productCode=${this.data.productCode}`,
+    })
+  },
 })

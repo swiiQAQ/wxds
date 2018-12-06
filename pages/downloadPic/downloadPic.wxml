@@ -1,0 +1,52 @@
+<!--pages/canvasTest/canvasTest.wxml-->
+<wxs src="../../utils/util.wxs" module="tools"></wxs>
+<wxs module="tools2">
+  var antiIndexOf = function(list,value){
+    for(var i = 0; i< list.length; i++){
+      if(list[i] == value){
+        console.log(i);
+        return i+1;
+      }
+    }
+  }
+  module.exports={
+    antiIndexOf: antiIndexOf,
+  }
+</wxs>
+    
+  <view class="goods-info">
+    <p>
+      商品信息
+      <text class="copy" bindtap='copy'>复制</text>
+    </p>
+    <view class="goods-detail">
+      <text class='product-name'>{{productName}}</text>
+      <view>
+        <text>尺码：</text>
+        <text>卖点：{{sellerPoint}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="select-wrap">
+    <view class="half-mask {{editPanel?'show':''}}" catchtap='closeMask'></view>
+    <view>
+      <span class='select-text'>请选择图片</span>
+    </view>
+    <view class="gallery-list">
+      <view wx:for="{{defaultGallery}}" class="img-wrap" bindtap='selectImg' data-index="{{index}}">
+        <image mode='aspectFit' src='{{item}}'></image>
+        <block wx:if="{{tools.indexOf(selectedList,index)}}">
+          <span class="selected-icon">
+            {{tools2.antiIndexOf(selectedList, index)}}
+          </span>
+          <view class="selected-mask"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+<view class="sticky-bottom">
+  <checkbox bindtap='selectAllHandler' checked='{{selectAll}}' id="hasRead" color="#fff"/>
+  <text bindtap='clearSelectedHandler'>全选</text>
+  <button type='warn' bindtap='createCanvas'>批量下载</button>
+</view>

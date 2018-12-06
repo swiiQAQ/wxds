@@ -1,5 +1,12 @@
 <wxs src="../../utils/util.wxs" module="tools" />
+
 <view class="mask {{mask? 'show':''}}" bindtap='closeMask'>
+  <view wx:if="{{type=='download'}}" class="overlay2" catchtap='holdMask'>
+    <navigator url='/pages/downloadPic/downloadPic?productCode={{productCode}}'>
+      <button type='special'>下载单张图片</button>
+    </navigator>
+    <button type='warn' bindtap='download'>下载拼图</button>
+  </view>
   <!-- <view class="overlay">
     <view class="overlay-tp">
       <image src=""></image>
@@ -12,7 +19,7 @@
       </view>
     </view>
   </view> -->
-  <view class="overlay" catchtap='holdMask'>
+  <view wx:else class="overlay" catchtap='holdMask'>
     <i class="clear icomoon" bindtap='closeMask'></i>
     <view class="overlay-top flex-box">
       <image class="sku-img" bindtap='previewImg' data-index="{{}}" src="{{colorImage ? colorImage : galleryList[0].little}}"></image>
@@ -74,6 +81,12 @@
    
   </view>
   <view class="product-info">
+    <!-- <view class="share" bindtap='drawCanvas'>
+      <text style="font-size: 30rpx;">分享</text>
+    </view> -->
+    <view class="share" bindtap='showMask' data-type='download'>
+      <text style="font-size: 30rpx;">分享</text>
+    </view>
     <text class="brand-name">{{brandName}}</text>
     <text class="product-name">{{productName}}</text>
     <view class="price-wrap">
@@ -170,6 +183,7 @@
     <icon class="icomoon service"></icon>
     <text>客服</text>
   </view>
+  
   <navigator class="icon-wrap" url="/pages/cart/cart" open-type='switchTab'>
     <icon class="icomoon cart"></icon>
     <text>购物袋</text>

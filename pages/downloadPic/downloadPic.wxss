@@ -1,0 +1,21 @@
+/* pages/downloadPic/downloadPic.wxss */
+@import '../canvasTest/canvasTest.wxss';
+.select-wrap{
+  margin-top: 20rpx;
+}
+.goods-info p{
+  position: relative;
+}
+.copy{
+  width: 100rpx;
+  height: 40rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: #eb3c19;
+  border-radius: 100rpx;
+  line-height: 40rpx;
+  text-align: center;
+  position: absolute;
+  right: 47rpx;
+  top: 20rpx;
+}
